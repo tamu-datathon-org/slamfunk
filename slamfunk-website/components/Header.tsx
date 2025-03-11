@@ -54,7 +54,7 @@ export default function Header() {
             */}
             <li>
               <a
-                href="mailto:team@tamudatathon.com"
+                href="#footersec"
                 className="text-sm text-gray-800 dark:text-white px-4 py-2 rounded-md hover:bg-blue-50 dark:hover:bg-blue-800 transition-colors"
               >
                 Contact
