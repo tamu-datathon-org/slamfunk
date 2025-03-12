@@ -6,6 +6,7 @@ import Accordion from "components/Accordion";
 import { FaBasketballBall, FaChartLine, FaTrophy, FaUserGraduate, FaCalendarAlt } from "react-icons/fa";
 import Link from "next/link";
 import MarchMadnessHero from "../components/Hero";
+import Leaderboard from "components/Leaderboard";
 
 const Timeline = () => {
   const events = [
@@ -211,6 +212,11 @@ export default function MarchMadnessPage() {
               */}
             </div>
           </div>
+        </section>
+
+        <section id="leaderboard-section">
+                <Leaderboard/>
+
         </section>
       </main>
       <Footer />
