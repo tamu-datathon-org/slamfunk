@@ -29,14 +29,14 @@ export async function GET(_request: NextRequest, { params }) {
         };
         const data = await dynamoDB.query(q).promise();
         if (data.Items.length === 0) {
-            NextResponse.json({ error: 'User does not have a writeup submitted' }, { status: 404 });
+            return NextResponse.json({ error: 'User does not have a writeup submitted' }, { status: 404 });
         } else {
             const writeup = data.Items[0] as Writeup;
-            NextResponse.json(writeup, { status: 200 });
+            return NextResponse.json(writeup, { status: 200 });
         }
     } catch (error) {
         console.error(error);
-        NextResponse.json({ error: error }, { status: 500 });
+        return NextResponse.json({ error: error }, { status: 500 });
     }
 }
 
@@ -52,7 +52,7 @@ export async function DELETE(_request: NextRequest, { params }) {
         };
         const data = await dynamoDB.query(q).promise();
         if (data.Items.length === 0) {
-            NextResponse.json({ error: 'User does not have a writeup submitted' }, { status: 404 });
+            return NextResponse.json({ error: 'User does not have a writeup submitted' }, { status: 404 });
         } else {
             const writeup: Writeup = {
                 id: data.Items[0].id,
@@ -74,10 +74,11 @@ export async function DELETE(_request: NextRequest, { params }) {
                 Key: { id: writeup.id },
             };
             await dynamoDB.delete(d).promise();
+            return NextResponse.json({ message: 'Writeup deleted' }, { status: 200 });
         }
     } catch (error) {
         console.error(error);
-        NextResponse.json({ error: error }, { status: 500 });
+        return NextResponse.json({ error: error }, { status: 500 });
     }
 }
 

@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import Header from 'components/Header';
 import FileUpload from 'components/FileUpload';
 import { Writeup, WriteupType } from './types';
-import { useSession } from 'next-auth/react';
+import { getSession, useSession } from 'next-auth/react';
 import { redirect } from 'next/navigation';
 import { PiLinkBold } from "react-icons/pi";
 import { BsCheckCircleFill, BsExclamationCircleFill, BsFillQuestionCircleFill } from "react-icons/bs";
@@ -15,22 +15,23 @@ export default function WriteupPage() {
     const { data:session, status } = useSession();
     const [writeupData, setWriteupData] = useState<Writeup|null>(null);
     const [submitted, setSubmitted] = useState<boolean>(false);
-    console.log(session)
-    const userId = ''
+    const [loading, setLoading] = useState<boolean>(true);
+
     // check that the user is logged in
     // fetch writeup data if it exists for the user
     useEffect(() => {
 
         const fetchWriteupData = async () => {
+            const session = await getSession();
             const userId = session?.user?.id;
             if (!userId) { return }
-            console.log(userId);
             const res = await fetch(`/api/writeup/${userId}`);
+            const data = await res.json();
             if (res.ok) {
-                const data = await res.json();
                 setWriteupData(data);
                 setSubmitted(true);
             }
+            setLoading(false)
         }
 
         fetchWriteupData();
@@ -38,6 +39,8 @@ export default function WriteupPage() {
     }, [submitted])
     if (status === 'loading') {return <></>};
     if (status === 'unauthenticated') { return redirect('/login');}
+    if (!session?.user?.id) { return redirect('/login'); }
+    if (loading) { return <></> }
 
     return (
         <div className='flex flex-col min-h-screen bg-white dark:bg-gradient-to-b dark:from-blue-950 dark:to-blue-900'>
@@ -45,6 +48,7 @@ export default function WriteupPage() {
             <div className='w-full p-4 md:p-6 lg:p-8'>
                 {(writeupData && submitted) ?
                 <SubmissionComplete
+                    userId={session.user.id}
                     setSubmitted={setSubmitted}
                     bracketSubmitted={false}
                     submissionType={writeupData.type}
@@ -52,7 +56,7 @@ export default function WriteupPage() {
                 />
                 : (new Date() < new Date(2025, 3, 4)) ?
                 <SubmissionUi
-                    userId={userId}
+                    userId={session.user.id}
                     submitted={submitted}
                     setSubmitted={setSubmitted}
                 />
@@ -200,12 +204,22 @@ interface SubmissionCompleteProps {
     bracketSubmitted: boolean;
     submissionType: string;
     fileName: string;
+    userId: string;
 }
 
 const SubmissionComplete = (props: SubmissionCompleteProps) => {
+    const [error, setError] = useState<string | null>(null);
 
-    const handleDeleteSubmission = () => {
-
+    const handleDeleteSubmission = async () => {
+        const res = await fetch(`/api/writeup/${props.userId}`, {
+            method: 'DELETE'
+        });
+        const data = await res.json();
+        if (res.ok) {
+            props.setSubmitted(false);
+        } else {
+            setError(`Error: ${data.error}`);
+        }
     }
 
     return (
@@ -256,6 +270,7 @@ const SubmissionComplete = (props: SubmissionCompleteProps) => {
                 {props.fileName}
             </p>
         </div>
+        {error ? <p className='mt-4 font-medium text-red-600'>{error}</p> : <></>}
     </div>
     )
 }

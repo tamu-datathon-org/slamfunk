@@ -77,10 +77,10 @@ export async function POST(request: NextRequest) {
             type: type,
         }
         await dynamoDB.put({ TableName: TABLE_NAME, Item: writeup }).promise();
-        NextResponse.json({ message: 'Writeup created successfully' }, { status: 201 });
+        return NextResponse.json({ message: 'Writeup created successfully' }, { status: 201 });
     } catch (error) {
         console.error(error);
-        NextResponse.json({ error: error }, { status: 500 });
+        return NextResponse.json({ error: error }, { status: 500 });
     }
 }
 
