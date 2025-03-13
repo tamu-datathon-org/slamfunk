@@ -16,15 +16,15 @@ type User = {
   maxScore: number;
 };
 
-export async function POST(request: NextRequest) {
-    console.log('POST request received');
-    const user: User = await request.json();
-    const params = { TableName: TABLE_NAME, Item: user };
+export async function GET(_request: NextRequest, { params }) {
+    const { uid } = params;
+    console.log(uid)
+    const paramsDB = { TableName: TABLE_NAME, Key: { uid } };
     try {
-        await dynamoDB.put(params).promise();
-        return NextResponse.json({ message: 'User created successfully' });
+        const data = await dynamoDB.get(paramsDB).promise();
+        const user = data.Item as User || {};
+        return NextResponse.json(user);
     } catch (error) {
         return NextResponse.json({ error: (error as Error).message }, { status: 500 });
     }
 }
-
