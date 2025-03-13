@@ -1,4 +1,4 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
+/*import type { NextApiRequest, NextApiResponse } from 'next'
  
 type ResponseData = {
   message: string
@@ -20,4 +20,4 @@ export default function handler(
         res.status(405).json({ message: 'Method not allowed' })
     }
 }
-
+*/
