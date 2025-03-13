@@ -3,6 +3,9 @@ import { WriteupType } from "../app/writeup/types";
 import { useState } from "react";
 
 interface FileUploadProps {
+    submitted: boolean;
+    setSubmitted: React.Dispatch<React.SetStateAction<boolean>>;
+    userId: string;
     type: WriteupType;
 }
 
@@ -23,6 +26,7 @@ export default function FileUpload(props: FileUploadProps) {
         } else {
             const file = e.dataTransfer.files[0];
             setFile(file);
+            props.setSubmitted(true);
             uploadFile(file);
         }
     }
@@ -35,11 +39,28 @@ export default function FileUpload(props: FileUploadProps) {
         } else {
             const file = e.target.files[0];
             setFile(file);
+            props.setSubmitted(true);
             uploadFile(file);
         }
     }
 
     const uploadFile = async (file: File) => {
+        const data = new FormData();
+        data.append('file', file);
+        data.append('uid', props.userId);
+        try {
+            const response = await fetch('/api/writeup', {
+                method: 'POST',
+                body: data
+            });
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            } else {
+                console.log('File uploaded successfully');
+            }
+        } catch (error) {
+            console.error('There was an error!', error);
+        }
     }
 
     const validateFile = (e: FileList) => {
@@ -60,6 +81,7 @@ export default function FileUpload(props: FileUploadProps) {
     }
 
     const removeFile = () => {
+        props.setSubmitted(false);
         setFile(null);
     }
 

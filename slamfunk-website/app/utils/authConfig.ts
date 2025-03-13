@@ -10,6 +10,22 @@ export const authConfig = {
         callbacks: {
         async signIn({ user, account, profile }) {
             if (account?.provider === "google" && profile?.email) {
+                // create user in database only if it doesn't exist'
+                const res = await fetch(`${process.env.NEXTAUTH_URL}api/user/${user.id}`);
+                if (res.status === 404) {
+                    await fetch(`${process.env.NEXTAUTH_URL}api/user`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            uid: user.id,
+                            email: profile.email,
+                            name: profile.name,
+                            maxScore: 0,
+                        }),
+                    });
+                }
                 return profile.email.endsWith("@tamu.edu");
             }
             return false;

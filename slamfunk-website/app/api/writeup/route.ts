@@ -1,5 +1,7 @@
+import { WriteupType } from 'app/writeup/types';
 import AWS from 'aws-sdk';
 import { NextRequest, NextResponse } from 'next/server';
+import { Writeup } from 'app/writeup/types';
 
 const s3 = new AWS.S3({
   region: process.env.AWS_REGION,
@@ -17,57 +19,65 @@ const dynamoDB = new AWS.DynamoDB.DocumentClient({
 const BUCKET_NAME = process.env.S3_BUCKET_NAME;
 const TABLE_NAME = 'Writeups';
 
-type Writeup = {
-  id: string;
-  user_id: string;
-  s3_key: string;
-  filename: string;
-};
-
+// ! assumes that user doesn't already have a writeup submitted
+// ! ^ logic is handled in the frontend to validate the above
 export async function POST(request: NextRequest) {
     const data = await request.formData();
-    const file = data.get('file') as File;
+    const id = data.get('id') as string;
     const uid = data.get('uid') as string;
-    if (!file || !uid) {
-        return NextResponse.json({ error: 'Incomplete form data' }, { status: 400 });
-    }
-    try {
-        const q = {
-            TableName: TABLE_NAME,
-            KeyConditionExpression: 'user_id = :user_id',
-            ExpressionAttributeValues: {
-                ':user_id': uid,
-            },
-        };
-        const data = await dynamoDB.query(q).promise();
-        // if the user exists in writeup
-        // delete existing file from s3
-        // upload new file to s3
-        // update the entry in writeups table
+    const type = data.get('type') as string;
+    let link = null; 
+    let filename = null; 
 
-        // if the user doesn't exist in writeup
-        // store the file upload in s3
-        // create a new entry in writeups table
-        if (data.Items.length > 0) {
-            console.log("User exists in writeup, deleting old file");
-            const oldKey = data.Items[0].s3_key;
-            await s3.deleteObject({ Bucket: BUCKET_NAME, Key: oldKey }).promise();
-        } else { console.log("User doesn't exist in writeup"); }
-        const uploadResult = await s3.upload({
-            Bucket: BUCKET_NAME,
-            Key: `${uid}/${file.name}`,
-            Body: file,
-            ContentType: file.type,
-        }).promise();
-        const fileUrl = uploadResult.Location;
+    if (!id || !uid || !type) {
+        return NextResponse.json({ error: 'Incomplete form data (id, uid, type)' }, { status: 400 });
+    }
+
+    // if a file upload type, upload data to s3
+    // otherwise label as a yt vid and store yt vid link
+    if (type === WriteupType.Document || type === WriteupType.Video) {
+        const file = data.get('file') as File;
+        if (!file) {
+            return NextResponse.json({ error: 'Incomplete form data (file)' }, { status: 400 });
+        }
+        try {
+            const uploadResult = await s3.upload({
+                Bucket: BUCKET_NAME,
+                Key: `${uid}/${file.name}`,
+                Body: Buffer.from(await file.arrayBuffer()),
+                ContentType: file.type,
+            }).promise();
+            link = uploadResult.Location;
+            filename = file.name;
+        } catch (error) {
+            console.error(error);
+            return NextResponse.json({ error: error }, { status: 500 });
+        }
+    } else if (type === WriteupType.YouTube){
+        link = data.get('link') as string;
+        filename = 'YouTube Video';
+        if (!link) {
+            return NextResponse.json({ error: 'Incomplete form data (link)' }, { status: 400 });
+        }
+    } else {
+        return NextResponse.json({ error: 'Invalid writeup type' }, { status: 400 });
+    }
+
+    // validate link and file name generation 
+    if (!link || !filename) {
+        return NextResponse.json({ error: 'Unable to generate link and file name' }, { status: 500 });
+    }
+
+    try {
         const writeup: Writeup = {
-            id: uid,
+            id: id,
             user_id: uid,
-            s3_key: fileUrl,
-            filename: file.name,
+            link: link,
+            filename: filename,
+            type: type,
         }
         await dynamoDB.put({ TableName: TABLE_NAME, Item: writeup }).promise();
-        return NextResponse.json({ message: 'Writeup created successfully' }, { status: 201 });
+        NextResponse.json({ message: 'Writeup created successfully' }, { status: 201 });
     } catch (error) {
         console.error(error);
         NextResponse.json({ error: error }, { status: 500 });
