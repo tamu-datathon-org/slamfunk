@@ -1,8 +1,18 @@
+"use client"
+
 import Link from "next/link";
 import ThemeSwitch from "./ThemeSwitch";
 import Image from "next/image";
+import { useSession } from "next-auth/react";
 
 export default function Header() {
+  const { data: session, status } = useSession();
+
+  const handleSignOut = async () => {
+    const { signOut } = await import("next-auth/react");
+    signOut({ callbackUrl: '/' });
+  };
+
   return (
     <header className="bg-white dark:bg-gradient-to-r dark:from-blue-950 dark:to-blue-900 shadow-sm border-b border-gray-100 dark:border-blue-800">
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
@@ -42,16 +52,25 @@ export default function Header() {
                 Rules
               </a>
             </li>
-            {/* Registration link commented out until ready
-            <li>
-              <Link
-                href="/register"
-                className="text-sm bg-gradient-to-r from-blue-500 to-teal-400 text-white px-4 py-2 rounded-md hover:opacity-90 transition-colors"
-              >
-                Register
-              </Link>
-            </li>
-            */}
+            {status === "authenticated" ? (
+              <li>
+                <button
+                  onClick={handleSignOut}
+                  className="text-sm bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition-colors"
+                >
+                  Logout
+                </button>
+              </li>
+            ) : (
+              <li>
+                <Link
+                  href="/login"
+                  className="text-sm bg-gradient-to-r from-blue-500 to-teal-400 text-white px-4 py-2 rounded-md hover:opacity-90 transition-colors"
+                >
+                  Login
+                </Link>
+              </li>
+            )}
             <li>
               <a
                 href="#footersec"
