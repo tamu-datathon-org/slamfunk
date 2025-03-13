@@ -74,20 +74,3 @@ export async function POST(request: NextRequest) {
     }
 }
 
-export async function GET({ params }: { params: { uid: string } }) {
-    try {
-        const q = {
-            TableName: TABLE_NAME,
-            KeyConditionExpression: 'user_id = :user_id',
-            ExpressionAttributeValues: {
-                ':user_id': params.uid,
-            },
-        };
-        const data = await dynamoDB.query(q).promise();
-        return NextResponse.json(data.Items || {});
-    } catch (error) {
-        console.error(error);
-        NextResponse.json({ error: error }, { status: 500 });
-    }
-}
-
