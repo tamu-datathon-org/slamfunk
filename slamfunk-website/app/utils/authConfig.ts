@@ -30,6 +30,12 @@ export const authConfig = {
             }
             return false;
         },
+        async session({ session, token }) {
+            if (session.user) {
+                session.user.id = token.sub as string;
+            }
+            return session;
+        },
     },
     pages: {
         signIn: '/login',
