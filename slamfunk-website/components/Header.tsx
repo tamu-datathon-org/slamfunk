@@ -52,7 +52,7 @@ export default function Header() {
                 Rules
               </a>
             </li>
-            {status === "authenticated" ? (
+            {/*{status === "authenticated" ? (
               <li>
                 <button
                   onClick={handleSignOut}
@@ -70,7 +70,7 @@ export default function Header() {
                   Login
                 </Link>
               </li>
-            )}
+            )}*/}
             <li>
               <a
                 href="#footersec"

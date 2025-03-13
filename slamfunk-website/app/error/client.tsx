@@ -3,7 +3,7 @@ import Header from "components/Header";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 
-export default function AuthError() {
+export default function AuthErrorClient() {
   const searchParams = useSearchParams();
   const error = searchParams.get("error");
 
