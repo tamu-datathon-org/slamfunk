@@ -9,10 +9,10 @@ export default function Header() {
         <div className="flex items-center">
           <Link href="/" className="flex items-center">
             <Image
-              src="/tdlogo.png"
+              src="/basketball.png"
               alt="TAMU Datathon"
-              width={80}
-              height={80}
+              width={48}
+              height={48}
             />
           </Link>
         </div>
