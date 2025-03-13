@@ -26,8 +26,6 @@ export default function FileUpload(props: FileUploadProps) {
         } else {
             const file = e.dataTransfer.files[0];
             setFile(file);
-            props.setSubmitted(true);
-            uploadFile(file);
         }
     }
 
@@ -39,15 +37,15 @@ export default function FileUpload(props: FileUploadProps) {
         } else {
             const file = e.target.files[0];
             setFile(file);
-            props.setSubmitted(true);
-            uploadFile(file);
         }
     }
 
-    const uploadFile = async (file: File) => {
+    const uploadFile = async () => {
         const data = new FormData();
-        data.append('file', file);
+        data.append('id', crypto.randomUUID().toString());
         data.append('uid', props.userId);
+        data.append('type', props.type);
+        data.append('file', file);
         try {
             const response = await fetch('/api/writeup', {
                 method: 'POST',
@@ -56,6 +54,7 @@ export default function FileUpload(props: FileUploadProps) {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             } else {
+                props.setSubmitted(true);
                 console.log('File uploaded successfully');
             }
         } catch (error) {
@@ -81,7 +80,6 @@ export default function FileUpload(props: FileUploadProps) {
     }
 
     const removeFile = () => {
-        props.setSubmitted(false);
         setFile(null);
     }
 
@@ -124,6 +122,13 @@ export default function FileUpload(props: FileUploadProps) {
                 </>
             }
         </div>
+        <button 
+            type="button"
+            onClick={uploadFile}
+            className={`mt-4 px-4 py-2 rounded-lg bg-black text-white`}
+        >
+            Submit
+        </button>
         {error ? <p className="mt-4 font-bold text-red-600">{error}</p> : <></>}
         <div className="mt-4 text-sm text-gray-600">
             <p>
