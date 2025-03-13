@@ -4,12 +4,7 @@ import { useState } from 'react';
 import { IoCloudUpload } from "react-icons/io5";
 import Header from 'components/Header';
 import FileUpload from 'components/FileUpload';
-
-export enum WriteupType {
-    Document = 'document',
-    Video = 'video',
-    YouTube = 'youtube'
-}
+import { WriteupType } from './types';
 
 export default function WriteupPage() {
     const [activeTab, setActiveTab] = useState(WriteupType.Document);

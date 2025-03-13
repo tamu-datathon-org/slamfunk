@@ -1,5 +1,5 @@
 import { IoCloudUpload, IoClose, IoDocumentText, IoVideocam } from "react-icons/io5"
-import { WriteupType } from "app/writeup/page";
+import { WriteupType } from "../app/writeup/types";
 import { useState } from "react";
 
 interface FileUploadProps {
