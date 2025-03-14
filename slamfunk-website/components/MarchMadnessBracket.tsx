@@ -369,11 +369,11 @@ const MarchMadnessBracket: React.FC<MarchMadnessBracketProps> = ({
 
   return (
     <div className="w-full h-screen p-4 font-sans bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 overflow-y-auto">
-      <div className="flex justify-between items-center mb-4">
-        <h1 className="text-2xl font-bold">{"March Madness Mania!"}</h1>
+      <div className="flex justify-center items-center mb-4">
+        <h1 className="text-2xl font-bold text-center">{"TD March Madness Mania!"}</h1>
         <button
           onClick={exportBracket}
-          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-all"
+          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-all ml-4"
         >
           Export Bracket
         </button>
