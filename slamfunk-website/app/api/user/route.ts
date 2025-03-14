@@ -9,15 +9,15 @@ const dynamoDB = new AWS.DynamoDB.DocumentClient({
 
 const TABLE_NAME = 'Users';
 
-type User = {
-  uid: string;
-  email: string;
-  name: string;
-  maxScore: number;
+export interface User {
+    uid: string;
+    email: string;
+    name: string;
+    maxScore: number;
+    bestBracket: string | null;
 };
 
 export async function POST(request: NextRequest) {
-    console.log('POST request received');
     const user: User = await request.json();
     const params = { TableName: TABLE_NAME, Item: user };
     try {

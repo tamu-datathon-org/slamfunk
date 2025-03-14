@@ -23,6 +23,7 @@ export const authConfig = {
                             email: profile.email,
                             name: profile.name,
                             maxScore: 0,
+                            bestBracket: null,
                         }),
                     });
                 }
