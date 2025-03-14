@@ -1,15 +1,15 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 
-const scoringPoints = [1, 2, 4, 8, 16, 32];
-const roundOrder = [
-  'round_64',
-  'round_32',
-  'sweet_16',
-  'elite_8',
-  'final_4',
-  'championship',
-];
+// const scoringPoints = [1, 2, 4, 8, 16, 32];
+// const roundOrder = [
+//   'round_64',
+//   'round_32',
+//   'sweet_16',
+//   'elite_8',
+//   'final_4',
+//   'championship',
+// ];
 
 type Match = {
   team1: string;
@@ -27,161 +27,34 @@ type Bracket = {
   rank?: number;
 };
 
-type OfficialBracket = {
-  rounds: Record<string, Record<string, Match>>;
-};
-
 export default function Leaderboard() {
   const [brackets, setBrackets] = useState<Bracket[]>([]);
-  const [officalbracket, setOfficalBrackets] = useState<OfficialBracket | null>(
-    null
-  );
   const [selectedBracketId, setSelectedBracketId] = useState<string | null>(
     null
   );
 
-  useEffect(() => {
-    setBrackets([
-      {
-        id: 'alice123',
-        name: 'Alice',
-        predictions: {
-          rounds: {
-            round_64: {
-              match_1: {
-                team1: 'Gonzaga',
-                team2: 'Texas A&M',
-                winner: 'Gonzaga',
-              },
-              match_2: { team1: 'Duke', team2: 'Kansas', winner: 'Duke' },
-            },
-            round_32: {
-              match_1: { team1: 'Gonzaga', team2: 'Duke', winner: 'Gonzaga' },
-            },
-            sweet_16: {},
-            elite_8: {},
-            final_4: {},
-            championship: {},
-          },
-        },
-      },
-      {
-        id: 'bob456',
-        name: 'Bob',
-        predictions: {
-          rounds: {
-            round_64: {
-              match_1: {
-                team1: 'Gonzaga',
-                team2: 'Texas A&M',
-                winner: 'Texas A&M',
-              },
-              match_2: { team1: 'Duke', team2: 'Kansas', winner: 'Kansas' },
-            },
-            round_32: {
-              match_1: {
-                team1: 'Texas A&M',
-                team2: 'Kansas',
-                winner: 'Kansas',
-              },
-            },
-            sweet_16: {},
-            elite_8: {},
-            final_4: {},
-            championship: {},
-          },
-        },
-      },
-    ]);
+  //
 
-    setOfficalBrackets({
-      rounds: {
-        round_64: {
-          match_1: { team1: 'Gonzaga', team2: 'Texas A&M', winner: 'Gonzaga' },
-          match_2: { team1: 'Duke', team2: 'Kansas', winner: 'Kansas' },
-        },
-        round_32: {
-          match_1: { team1: 'Gonzaga', team2: 'Kansas', winner: 'Kansas' },
-        },
-        sweet_16: {},
-        elite_8: {},
-        final_4: {},
-        championship: {},
-      },
-    });
+  // COMMENT OUT LATER WHEN APIS ARE WORKING
+
+  useEffect(() => {
+    const fetchLeaderboard = async () => {
+      try {
+        const response = await fetch('/api/bracket', {
+          method: 'GET',
+        }); // FIX LATER
+        const data = await response.json();
+
+        setBrackets(data);
+      } catch (error) {
+        console.error('Error fetching leaderboard:', error);
+      }
+    };
+
+    fetchLeaderboard();
   }, []);
 
-  //
-  // COMMENT OUT LATER WHEN APIS ARE WORKING
-  //
-  // useEffect(() => {
-  //   const fetchLeaderboard = async () => {
-  //     try {
-  //       const response = await fetch('/api/leaderboard', {
-  //         method: 'GET',
-  //       }); // FIX LATER
-  //       const data = await response.json();
-
-  //       setBrackets(data);
-  //     } catch (error) {
-  //       console.error('Error fetching leaderboard:', error);
-  //     }
-  //   };
-
-  //   fetchLeaderboard();
-  // }, []);
-
-  // useEffect(() => {
-  //   const fetchOfficalBracket = async () => {
-  //     try {
-  //       const response = await fetch('/api/officalbracket', {
-  //         method: 'GET',
-  //       }); // FIX LATER
-  //       const data = await response.json();
-
-  //       setOfficalBrackets(data);
-  //     } catch (error) {
-  //       console.error('Error fetching leaderboard:', error);
-  //     }
-  //   };
-
-  //   fetchOfficalBracket();
-  // }, []);
-  function calculateBracketScore(
-    userBracket: Bracket['predictions'],
-    officialResults: OfficialBracket
-  ) {
-    let score = 0;
-
-    roundOrder.forEach((round, roundIndex) => {
-      const userRound = userBracket.rounds[round] || {};
-      const officialRound = officialResults.rounds[round] || {};
-
-      for (const match in userRound) {
-        if (
-          userRound[match].winner === officialRound[match]?.winner &&
-          officialRound[match]
-        ) {
-          score += scoringPoints[roundIndex];
-        }
-      }
-    });
-
-    return score;
-  }
-
-  if (officalbracket) {
-    brackets.forEach((bracket) => {
-      bracket.score = calculateBracketScore(
-        bracket.predictions,
-        officalbracket
-      );
-    });
-  }
-
-  const sortedBracket = [...brackets].sort(
-    (a, b) => (b.score ?? 0) - (a.score ?? 0)
-  );
+  const sortedBracket = [...brackets].sort((a, b) => b.score - a.score);
   let currentRank = 1;
 
   sortedBracket.forEach((user, index) => {
