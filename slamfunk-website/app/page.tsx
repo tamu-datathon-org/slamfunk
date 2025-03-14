@@ -172,7 +172,12 @@ export default function MarchMadnessPage() {
             </>
           }
  
-          rightHalf={null} // prob add a picture or sum
+          rightHalf={<Image
+            src="/mmflyer.png"
+            width={500}
+            height={500}
+            alt="TD March Madness Flyer"
+          />} // prob add a picture or sum
         />
         
         <section id="faq-section">
