@@ -166,16 +166,25 @@ const MarchMadnessBracket: React.FC<MarchMadnessBracketProps> = ({
   };
 
   // Export bracket data as JSON
-  const exportBracket = () => {
-    const dataStr = JSON.stringify(bracket, null, 2);
-    const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
-    
-    const exportFileDefaultName = `${bracket.id || 'bracket'}.json`;
-    
-    const linkElement = document.createElement('a');
-    linkElement.setAttribute('href', dataUri);
-    linkElement.setAttribute('download', exportFileDefaultName);
-    linkElement.click();
+  const exportBracket = async () => {
+    try {
+      const response = await fetch('/api/bracket', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(bracket),
+      });
+  
+      if (!response.ok) {
+        throw new Error(`Failed to send bracket: ${response.statusText}`);
+      }
+  
+      const result = await response.json();
+      console.log('Bracket successfully sent:', result);
+    } catch (error) {
+      console.error('Error sending bracket:', error);
+    }
   };
 
   // Render a match card
