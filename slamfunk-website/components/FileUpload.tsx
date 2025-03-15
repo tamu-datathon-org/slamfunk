@@ -3,6 +3,9 @@ import { WriteupType } from "../app/writeup/types";
 import { useState } from "react";
 
 interface FileUploadProps {
+    submitted: boolean;
+    setSubmitted: React.Dispatch<React.SetStateAction<boolean>>;
+    userId: string;
     type: WriteupType;
 }
 
@@ -23,7 +26,6 @@ export default function FileUpload(props: FileUploadProps) {
         } else {
             const file = e.dataTransfer.files[0];
             setFile(file);
-            uploadFile(file);
         }
     }
 
@@ -35,11 +37,29 @@ export default function FileUpload(props: FileUploadProps) {
         } else {
             const file = e.target.files[0];
             setFile(file);
-            uploadFile(file);
         }
     }
 
-    const uploadFile = async (file: File) => {
+    const uploadFile = async () => {
+        const data = new FormData();
+        data.append('id', crypto.randomUUID().toString());
+        data.append('uid', props.userId);
+        data.append('type', props.type);
+        data.append('file', file);
+        try {
+            const response = await fetch('/api/writeup', {
+                method: 'POST',
+                body: data
+            });
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            } else {
+                props.setSubmitted(true);
+                console.log('File uploaded successfully');
+            }
+        } catch (error) {
+            console.error('There was an error!', error);
+        }
     }
 
     const validateFile = (e: FileList) => {
@@ -102,6 +122,13 @@ export default function FileUpload(props: FileUploadProps) {
                 </>
             }
         </div>
+        <button 
+            type="button"
+            onClick={uploadFile}
+            className={`mt-4 px-4 py-2 rounded-lg bg-black text-white`}
+        >
+            Submit
+        </button>
         {error ? <p className="mt-4 font-bold text-red-600">{error}</p> : <></>}
         <div className="mt-4 text-sm text-gray-600">
             <p>

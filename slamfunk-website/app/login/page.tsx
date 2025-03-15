@@ -2,8 +2,15 @@
 import Header from "components/Header";
 import { FcGoogle } from "react-icons/fc";
 import { signIn } from "next-auth/react";
+import { useSession } from "next-auth/react";
+import {redirect} from "next/navigation";
 
 export default function LoginPage() {
+    // redirect if user is already authenticated
+    const { status } = useSession();
+    if (status === "loading") { return <></>; }
+    if (status === "authenticated") { return redirect("/"); }
+
   const handleLogin = () => {
     signIn("google", { callbackUrl: "/" });
   };

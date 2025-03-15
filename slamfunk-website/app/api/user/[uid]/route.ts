@@ -22,8 +22,12 @@ export async function GET(_request: NextRequest, { params }) {
     const paramsDB = { TableName: TABLE_NAME, Key: { uid } };
     try {
         const data = await dynamoDB.get(paramsDB).promise();
-        const user = data.Item as User || {};
-        return NextResponse.json(user);
+        const user = data.Item as User || null; 
+        if (!user) {
+            return NextResponse.json({ error: 'User not found' }, { status: 404 });
+        } else {
+            return NextResponse.json(user, { status: 200 });
+        }
     } catch (error) {
         return NextResponse.json({ error: (error as Error).message }, { status: 500 });
     }
