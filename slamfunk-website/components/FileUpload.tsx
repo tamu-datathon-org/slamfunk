@@ -86,7 +86,7 @@ export default function FileUpload(props: FileUploadProps) {
     return (
     <div>
         <div 
-            className={`relative bg-gray-100 p-12 border-2 border-black ${file ? "border-solid" : "border-dashed"} rounded-lg flex flex-col items-center gap-y-2`}
+            className={`relative dark:bg-gray-600 dark:border-white bg-gray-100 p-12 border-2 border-black ${file ? "border-solid" : "border-dashed"} rounded-lg flex flex-col items-center gap-y-2`}
             onDragOver={(e) => e.preventDefault()}
             onDrop={handleDrop}
         >
@@ -130,7 +130,7 @@ export default function FileUpload(props: FileUploadProps) {
             Submit
         </button>
         {error ? <p className="mt-4 font-bold text-red-600">{error}</p> : <></>}
-        <div className="mt-4 text-sm text-gray-600">
+        <div className="mt-4 text-sm text-gray-600 dark:text-gray-200">
             <p>
                 <span className="font-bold">
                     Accepted file types
