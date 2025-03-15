@@ -50,7 +50,7 @@ export default function WriteupPage() {
                 <SubmissionComplete
                     userId={session.user.id}
                     setSubmitted={setSubmitted}
-                    bracketSubmitted={false}
+                    bracketSubmitted={true}
                     submissionType={writeupData.type}
                     fileName={writeupData.filename}
                 />
@@ -141,7 +141,7 @@ const YouTubeLink = (props: YouTubeLinkProps) => {
                 <PiLinkBold className='text-gray-400 text-xl'/>
                 <input 
                     type='text' 
-                    className='w-full placeholder:text-gray-400 outline-none'
+                    className='bg-transparent w-full placeholder:text-gray-400 outline-none'
                     placeholder='Insert your YouTube link here'
                     value={link}
                     onChange={(e) => setLink(e.target.value)}
@@ -209,6 +209,18 @@ interface SubmissionCompleteProps {
 
 const SubmissionComplete = (props: SubmissionCompleteProps) => {
     const [error, setError] = useState<string | null>(null);
+    const [bracketSubmitted, setBracketSubmitted] = useState<boolean>(props.bracketSubmitted);
+
+    useEffect(() => {
+
+        const checkBracketSubmission = async () => {
+            const res = await fetch(`/api/bracket/${props.userId}`);
+            setBracketSubmitted(res.ok);
+        }
+
+        checkBracketSubmission();
+
+    }, [])
 
     const handleDeleteSubmission = async () => {
         const res = await fetch(`/api/writeup/${props.userId}`, {
@@ -237,7 +249,7 @@ const SubmissionComplete = (props: SubmissionCompleteProps) => {
                 To resubmit your writeup, delete your current submission and create a new writeup (only 1 submission allowed)
             </p>
         </div>
-        {props.bracketSubmitted ? 
+        {bracketSubmitted ? 
         <></>
         :
         <div className='mt-1 w-full px-4 py-2 rounded-lg bg-red-200 flex items-center gap-x-2 text-red-900'>
@@ -247,7 +259,7 @@ const SubmissionComplete = (props: SubmissionCompleteProps) => {
             </p>
         </div>
         }
-        <div className='mt-4 w-fit p-4 rounded-lg border-2 border-black flex flex-col gap-y-2'>
+        <div className='dark:bg-black mt-4 w-fit p-4 rounded-lg border-2 border-black flex flex-col gap-y-2'>
             <div className='w-full flex items-center justify-between gap-x-8'>
                 <h2 className='font-bold text-2xl'>Submission Details</h2>
                 <button

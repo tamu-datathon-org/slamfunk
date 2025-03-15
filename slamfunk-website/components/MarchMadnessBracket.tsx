@@ -1,4 +1,7 @@
+"use client"
 import React, { useState, useEffect } from 'react';
+import { Bracket } from 'app/api/bracket/route';
+import { useRouter } from 'next/navigation';
 
 // Type definitions
 type Team = string | null;
@@ -31,6 +34,7 @@ interface MarchMadnessBracketProps {
   onBracketChange?: (bracket: BracketData) => void;
   submissionId?: string;
   userID?: string;
+  roundData?: Bracket; 
 }
 
 const MarchMadnessBracket: React.FC<MarchMadnessBracketProps> = ({
@@ -38,9 +42,25 @@ const MarchMadnessBracket: React.FC<MarchMadnessBracketProps> = ({
   onBracketChange,
   submissionId = "user_bracket",
   userID = crypto.randomUUID(),
+  roundData
 }) => {
   // Initialize bracket data
-  const [bracket, setBracket] = useState<BracketData>({
+  const [bracket, setBracket] = useState<BracketData>(
+    (roundData) ?
+    {
+        id: roundData.id,
+        user_id: roundData.user_id,
+        rounds: {
+            round_64: roundData.rounds.round_64,
+            round_32: roundData.rounds.round_32,
+            sweet_16: roundData.rounds.sweet_16,
+            elite_8: roundData.rounds.elite_8,
+            final_4: roundData.rounds.final_4,
+            championship: roundData.rounds.championship
+        }
+    }
+    :
+    {
     id: submissionId,
     user_id: userID,
     rounds: {
@@ -52,6 +72,7 @@ const MarchMadnessBracket: React.FC<MarchMadnessBracketProps> = ({
       championship: {}
     }
   });
+  const router = useRouter();
 
   // Initialize from provided matches
   useEffect(() => {
@@ -182,6 +203,7 @@ const MarchMadnessBracket: React.FC<MarchMadnessBracketProps> = ({
   
       const result = await response.json();
       console.log('Bracket successfully sent:', result);
+      router.push('/bracket');
     } catch (error) {
       console.error('Error sending bracket:', error);
     }
@@ -227,11 +249,11 @@ const MarchMadnessBracket: React.FC<MarchMadnessBracketProps> = ({
       <div className="flex flex-col">
         <div className="flex items-center justify-between p-1">
           <span className="truncate max-w-[80px]">—</span>
-          <input type="radio" disabled className="ml-1" />
+          <input type="radio" className="ml-1" />
         </div>
         <div className="flex items-center justify-between p-1">
           <span className="truncate max-w-[80px]">—</span>
-          <input type="radio" disabled className="ml-1" />
+          <input type="radio" className="ml-1" />
         </div>
       </div>
     </div>
@@ -368,16 +390,13 @@ const MarchMadnessBracket: React.FC<MarchMadnessBracketProps> = ({
   };
 
   return (
-    <div className="w-full h-screen p-4 font-sans bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 overflow-y-auto">
-      <div className="flex justify-center items-center mb-4">
-        <h1 className="text-2xl font-bold text-center">{"TD March Madness Mania!"}</h1>
-        <button
-          onClick={exportBracket}
-          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-all ml-4"
-        >
-          Export Bracket
-        </button>
-      </div>
+    <div className="w-full h-screen p-4 rounded-lg font-sans bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 overflow-y-auto">
+            <button
+                onClick={exportBracket}
+                className="mb-6 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-all"
+            >
+                Submit
+            </button>
       
       <div className="flex h-[calc(100vh-120px)]">
         {/* Left side bracket */}
