@@ -27,7 +27,7 @@ export default function Header() {
           </Link>
         </div>
         <nav className="flex items-center">
-          <ul className="flex space-x-1 mr-2">
+          <ul className="flex space-x-1 mr-2 items-center">
             <li>
               <Link
                 href="/"
@@ -38,20 +38,20 @@ export default function Header() {
             </li>
             <li>
               <Link
-                href="#competition-tracks"
-                className="text-sm text-gray-800 dark:text-white px-4 py-2 rounded-md hover:bg-blue-50 dark:hover:bg-blue-800 transition-colors"
-              >
-                Challenge
-              </Link>
-            </li>
-            {/* <li>
-              <Link
                 href="/bracket"
                 className="text-sm text-gray-800 dark:text-white px-4 py-2 rounded-md hover:bg-blue-50 dark:hover:bg-blue-800 transition-colors"
               >
                 Bracket
               </Link>
-            </li> */}
+            </li> 
+            <li>
+              <Link
+                href="/writeup"
+                className="text-sm text-gray-800 dark:text-white px-4 py-2 rounded-md hover:bg-blue-50 dark:hover:bg-blue-800 transition-colors"
+              >
+                Writeup
+              </Link>
+            </li> 
             <li>
               <a
                 href="#faq-section"
@@ -60,7 +60,7 @@ export default function Header() {
                 Rules
               </a>
             </li>
-            {/*{status === "authenticated" ? (
+            {status === "authenticated" ? (
               <li>
                 <button
                   onClick={handleSignOut}
@@ -78,15 +78,7 @@ export default function Header() {
                   Login
                 </Link>
               </li>
-            )}*/}
-            <li>
-              <a
-                href="#footersec"
-                className="text-sm text-gray-800 dark:text-white px-4 py-2 rounded-md hover:bg-blue-50 dark:hover:bg-blue-800 transition-colors"
-              >
-                Contact
-              </a>
-            </li>
+            )}
           </ul>
           <ThemeSwitch />
         </nav>
