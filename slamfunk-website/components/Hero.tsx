@@ -42,22 +42,22 @@ export default function MarchMadnessHero() {
         <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-300">Time Remaining Until Brackets are Due!!:</h3>
         <h4 className="text-med font-semibold text-gray-700 dark:text-gray-300">March 19th, 2025 (11:59 PM)</h4>
       </div>
-      
-      <CountdownTimer targetDate={targetDate} />
-      
-      <div className="mt-4 mb-8">
-        <p className="text-blue-600 dark:text-blue-400 font-medium italic">Registration will be released shortly!</p>
-      </div>
 
-      <div className="flex justify-center space-x-6">
-        {/* Registration link commented out until ready 
+      <CountdownTimer targetDate={targetDate} />
+
+      <div className="flex justify-center space-x-6 mt-6">
         <Link
-          href="/register"
-          className="bg-gradient-to-r from-blue-500 to-teal-400 text-white px-6 py-3 rounded-md text-lg font-semibold hover:opacity-90 transition duration-300 transform hover:-translate-y-1"
+          href="/bracket"
+          className="bg-white text-black px-6 py-3 rounded-md text-lg font-semibold hover:opacity-90 transition duration-300 transform hover:-translate-y-1"
         >
-          Register Now
+          Build a Bracket
         </Link>
-        */}
+        <Link
+          href="/writeup"
+          className="bg-orange-500 text-white px-6 py-3 rounded-md text-lg font-semibold hover:opacity-90 transition duration-300 transform hover:-translate-y-1"
+        >
+          Writeups
+        </Link>
       </div>
     </section>
   );
