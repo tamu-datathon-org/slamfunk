@@ -2,22 +2,22 @@
 
 export const generateSampleMatches = () => {
     const teams = [
-      "Gonzaga", "Grand Canyon", "Mississippi St", "Michigan St",
-      "Purdue", "Montana St", "Kansas", "Samford",
-      "Arizona", "Long Beach St", "Dayton", "Nevada",
-      "Alabama", "Charleston", "Wisconsin", "Oregon",
-      "UConn", "Stetson", "Northwestern", "Florida Atlantic",
-      "San Diego St", "UAB", "Yale", "Auburn",
-      "Houston", "Longwood", "Texas A&M", "Nebraska",
-      "Iowa St", "South Dakota St", "Washington St", "Drake",
-      "North Carolina", "Howard", "Michigan", "Colorado St",
-      "Kentucky", "Oakland", "Texas Tech", "NC State",
-      "Tennessee", "Saint Peter's", "Texas", "Colorado",
-      "Duke", "Vermont", "James Madison", "Wisconsin",
-      "Marquette", "Western Kentucky", "Florida", "Boise St",
-      "Illinois", "Morehead St", "Washington", "Creighton",
-      "Baylor", "Colgate", "Utah St", "TCU",
-      "Iowa", "New Mexico", "BYU", "Virginia"
+      "Auburn", "ALST/SFU", "Louisville", "Creighton",
+      "Michigan", "UC San Diego", "Texas A&M", "Yale",
+      "Ole Miss", "SDSU/UNC", "Iowa St.", "Lipscomb",
+      "Marquette", "New Mexico", "Michigan St.", "Bryant",
+      "Florida", "Norfolk St.", "UConn", "Oklahoma",
+      "Memphis", "Colorado St.", "Maryland", "Grand Canyon",
+      "Missouri", "Drake", "Texas Tech", "UNCW",
+      "Kansas", "Arkansas", "St. John's", "Omaha",
+      "Duke", "AMER/MTSM", "Miss St.", "Baylor",
+      "Oregon", "Liberty", "Arizona", "Akron",
+      "BYU", "VCU", "Wisconsin", "Montana",
+      "Saint Mary's", "Vanderbilt", "Alabama", "Robert Morris",
+      "Houston", "SIUE", "Gonzaga", "Georgia",
+      "Clemson", "McNeese", "Purdue", "High Point",
+      "Illinois", "TEX/XAV", "Kentucky", "Troy",
+      "UCLA", "Utah St.", "Tennessee", "Wofford"
     ];
   
     const round64: { [key: string]: { team1: string; team2: string } } = {};
