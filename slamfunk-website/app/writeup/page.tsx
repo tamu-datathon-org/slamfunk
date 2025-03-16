@@ -194,7 +194,7 @@ const YouTubeLink = (props: YouTubeLinkProps) => {
           />
         </div>
 
-        <Button onClick={handleSubmission} disabled={isSubmitting} className="w-full sm:w-auto">
+        <Button onClick={handleSubmission} disabled={isSubmitting} className="mt-4 px-4 py-2 rounded-lg bg-black text-white">
           {isSubmitting ? "Submitting..." : "Submit YouTube Link"}
         </Button>
 
