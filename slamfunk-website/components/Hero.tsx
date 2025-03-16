@@ -3,7 +3,7 @@ import Link from "next/link";
 import CountdownTimer from "./CountdownTimer";
 
 export default function MarchMadnessHero() {
-  const targetDate = "2025-03-16T23:59:59";
+  const targetDate = "2025-03-19T23:59:59";
 
   return (
     <section className="text-center my-32 mx-4 sm:mx-8 md:mx-16 lg:mx-24 relative">
@@ -39,8 +39,8 @@ export default function MarchMadnessHero() {
       </p>
 
       <div className="mb-4">
-        <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-300">Time Remaining Until Selection Sunday:</h3>
-        <h4 className="text-med font-semibold text-gray-700 dark:text-gray-300">March 16th, 2025</h4>
+        <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-300">Time Remaining Until Brackets are Due!!:</h3>
+        <h4 className="text-med font-semibold text-gray-700 dark:text-gray-300">March 19th, 2025 (11:59 PM)</h4>
       </div>
       
       <CountdownTimer targetDate={targetDate} />
