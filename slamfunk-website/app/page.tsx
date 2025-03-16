@@ -10,12 +10,12 @@ import MarchMadnessHero from "../components/Hero";
 const Timeline = () => {
   const events = [
     {
-      date: "March 16th",
+      date: "March 19th",
       title: "Bracket Submission Deadline",
       description: "All brackets must be submitted by Selection Sunday"
     },
     {
-      date: "One week before Final Four",
+      date: "Night before the Final Four (April 4th)",
       title: "Data Science Write-Up Deadline",
       description: "Submit your analysis and methodology"
     },
@@ -202,18 +202,17 @@ export default function MarchMadnessPage() {
               Ready to Join the Madness?
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 font-light max-w-3xl mx-auto">
-              Think you can outsmart the madness? Registration is open until March 16th. 
+              Think you can outsmart the madness? Brackets are open until March 19, 11:59 PM.
+
               Put your bracket-making skills and data science knowledge to the test!
             </p>
             <div className="flex justify-center space-x-6">
-              {/* Registration link commented out until ready
               <Link
-                href="/register"
+                href="/bracket"
                 className="bg-blue-500 text-white px-6 py-3 rounded-md text-lg font-semibold hover:bg-blue-600 transition duration-300"
               >
-                Register Now
+                Start Building Now!
               </Link>
-              */}
             </div>
           </div>
         </section>
