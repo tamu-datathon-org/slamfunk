@@ -13,14 +13,14 @@ export const authConfig = {
         async signIn({ user, account, profile }) {
             if (account?.provider === "google" && profile?.email) {
                 // create user in database only if it doesn't exist'
-                const res = await fetch(`${process.env.NEXTAUTH_URL}/api/user/${user.id}`); if (res.status === 404) {
+                const res = await fetch(`${process.env.NEXTAUTH_URL}/api/user/${profile.email}`); if (res.status === 404) {
                     await fetch(`${process.env.NEXTAUTH_URL}/api/user`, {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
                         },
                         body: JSON.stringify({
-                            uid: user.id,
+                            uid: profile.email,
                             email: profile.email,
                             name: profile.name,
                             maxScore: 0,
@@ -34,7 +34,7 @@ export const authConfig = {
         },
         async session({ session, token }) {
             if (session.user) {
-                session.user.id = token.sub as string;
+                session.user.id = token.email as string;
             }
             return session;
         },
