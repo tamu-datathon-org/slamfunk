@@ -7,7 +7,9 @@ export const authConfig = {
             clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? "",
         }),
     ],
-        callbacks: {
+    trustHost: true,
+
+    callbacks: {
         async signIn({ user, account, profile }) {
             if (account?.provider === "google" && profile?.email) {
                 // create user in database only if it doesn't exist'
@@ -40,8 +42,8 @@ export const authConfig = {
     },
     pages: {
         signIn: '/login',
-            error: '/error',
+        error: '/error',
     },
     secret: process.env.NEXTAUTH_SECRET,
-        debug: process.env.NODE_ENV === 'development',
+    debug: process.env.NODE_ENV === 'development',
 }
