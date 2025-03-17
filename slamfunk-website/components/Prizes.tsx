@@ -6,20 +6,20 @@ const Prizes = () => {
   const prizes = [
     {
       image: "/airfryer.jpg",
-      name: "Air Fryer",
-      description: "Cook up delicious meals with minimal oil",
+      name: "Ninja Air Fryer",
+      description: "Got the eats? Get this air fryer!",
       position: "1st Place - Best Bracket"
     },
     {
       image: "/beats.avif",
       name: "Beats Headphones",
-      description: "Experience premium sound quality",
+      description: "Dr. Dre personally handcrafted these headphones.",
       position: "1st Place - Data Science Write-Up"
     },
     {
       image: "/camera.jpg",
-      name: "Digital Camera",
-      description: "Capture your memories in high definition",
+      name: "FujiFilm Instax",
+      description: "Take some heater pics with this cam cam",
       position: "Runner-Up Prizes"
     }
   ];
