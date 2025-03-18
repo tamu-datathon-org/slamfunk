@@ -123,11 +123,11 @@ for bracket in brackets:
                 'apiKey' : API_KEY,
             }
             try:
-                print(data)
+                # print(data)
                 update_url = f"{user_update_url}{bracket['user_id']}" 
                 post_response = requests.patch(update_url, json=data)
                 post_response.raise_for_status()
-                print(f"Updated user {user_data['name']}'s score successfully!")
+                # print(f"Updated user {user_data['name']}'s score successfully!")
             except requests.exceptions.RequestException as e:
                 print(f"Failed to update user data: {e}")
                 exit()
