@@ -48,7 +48,7 @@ const App: React.FC = () => {
             <div className='w-full p-4 md:p-6 lg:p-8'>
                 <h1 className='mt-8 text-4xl font-bold'>Bracket Submission</h1>
                 <h4 className='text-gray-600 text-lg'>
-                    Fill out your brackets below. You can fill up to 5 brackets.
+                    Fill out your brackets below. You can fill out up to 5 brackets.
                 </h4>
                 <div className='my-4 h-full flex flex-col gap-y-2'>
                     {brackets.map((bracket: Bracket) => (
