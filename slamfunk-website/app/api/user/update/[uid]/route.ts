@@ -12,9 +12,7 @@ const TABLE_NAME = 'Users';
 export async function PATCH(request: NextRequest, { params }) {
     const { uid } = params;
     const { maxScore, bestBracket, apiKey } = await request.json();
-    if (!uid || !maxScore || !bestBracket) {
-        return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
-    } else if (apiKey !== process.env.API_KEY) {
+    if (apiKey !== process.env.API_KEY) {
         return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
     const p = { 
