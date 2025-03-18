@@ -26,6 +26,13 @@ export async function POST(request: NextRequest) {
     }
     const p = { TableName: TABLE_NAME, Item: user, ConditionExpression: 'attribute_not_exists(uid)' };
     try {
+        const existingUser = await dynamoDB.get({
+            TableName: TABLE_NAME,
+            Key: { uid: user.uid }
+        }).promise()
+        if (existingUser.Item) {
+            return NextResponse.json({ error: 'User already exists' }, { status: 409 });
+        }
         await dynamoDB.put(p).promise();
         return NextResponse.json({ message: 'User created successfully' });
     } catch (error) {
