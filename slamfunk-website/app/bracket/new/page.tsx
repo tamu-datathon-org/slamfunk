@@ -33,7 +33,7 @@ export default function NewBracket() {
             <div className='w-full p-4 md:p-6 lg:p-8'>
                 <h1 className='mt-8 text-4xl font-bold'>New Bracket</h1>
                 <h4 className='text-gray-600 text-lg'>
-                    Fill out your brackets below. Click the "submit" button below once your are done.
+                    Fill out your bracket below. Click the "Submit Bracket" button below once you're done.
                 </h4>
                 <MarchMadnessBracket
                     initialMatches={generateSampleMatches()}
