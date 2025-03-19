@@ -2,9 +2,9 @@
 
 export const generateSampleMatches = () => {
     const teams = [
-      "Auburn", "ALST/SFU", "Louisville", "Creighton",
+      "Auburn", "Alabama St.", "Louisville", "Creighton",
       "Michigan", "UC San Diego", "Texas A&M", "Yale",
-      "Ole Miss", "SDSU/UNC", "Iowa St.", "Lipscomb",
+      "Ole Miss", "North Carolina", "Iowa St.", "Lipscomb",
       "Marquette", "New Mexico", "Michigan St.", "Bryant",
       "Florida", "Norfolk St.", "UConn", "Oklahoma",
       "Memphis", "Colorado St.", "Maryland", "Grand Canyon",
