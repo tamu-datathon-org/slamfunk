@@ -38,7 +38,7 @@ export default function EditBracket() {
             <div className='w-full p-4 md:p-6 lg:p-8'>
                 <h1 className='mt-8 text-4xl font-bold'>Bracket</h1>
                 <h4 className='text-gray-600 text-lg'>
-                    Edit your brackets below. Click the "Submit Bracket" button below once you're done.
+                    You can view your brackets but changes won't be implemented!
                 </h4>
                 <MarchMadnessBracket
                     submissionId={bracket.id}
