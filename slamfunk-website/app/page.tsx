@@ -107,7 +107,7 @@ export default function MarchMadnessPage() {
               <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md transition-colors duration-200 border-l-4 border-blue-500">
                 <div className="flex items-center mb-4">
                   <FaBasketballBall size={34} className="text-blue-500" />
-                  <h3 className="text-xl font-semibold ml-3 text-gray-800 dark:text-white">Best Bracket Track</h3>
+                  <h3 className="text-xl font-semibold ml-3 text-gray-800 dark:text-white">Best Bracket Track (CLOSED)</h3>
                 </div>
                 <p className="text-gray-600 dark:text-gray-300 font-light mb-4">Test your basketball knowledge and prediction skills!</p>
                 <ul className="list-disc pl-5 text-gray-600 dark:text-gray-300 font-light">
