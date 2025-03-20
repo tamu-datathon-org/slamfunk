@@ -423,7 +423,7 @@ const MarchMadnessBracket: React.FC<MarchMadnessBracketProps> = ({
 
         <div className="flex space-x-2">
 
-          <Button onClick={exportBracket} disabled={isDeadlinePassed || isSaving} className="flex items-center">
+          {/*<Button onClick={exportBracket} disabled={isDeadlinePassed || isSaving} className="flex items-center">
             {isSaving ? (
               <>Saving...</>
             ) : (
@@ -432,7 +432,7 @@ const MarchMadnessBracket: React.FC<MarchMadnessBracketProps> = ({
                 Submit Bracket
               </>
             )}
-          </Button>
+          </Button>*/}
         </div>
       </div>
 
