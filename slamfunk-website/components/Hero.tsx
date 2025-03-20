@@ -46,12 +46,12 @@ export default function MarchMadnessHero() {
       <CountdownTimer targetDate={targetDate} />
 
       <div className="flex justify-center space-x-6 mt-6">
-        {/*<Link
+        <Link
           href="/bracket"
           className="bg-white text-black px-6 py-3 rounded-md text-lg font-semibold hover:opacity-90 transition duration-300 transform hover:-translate-y-1"
         >
           Build a Bracket
-        </Link>*/}
+        </Link>
         <Link
           href="/writeup"
           className="bg-orange-500 text-white px-6 py-3 rounded-md text-lg font-semibold hover:opacity-90 transition duration-300 transform hover:-translate-y-1"
