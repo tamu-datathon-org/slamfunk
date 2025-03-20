@@ -46,9 +46,9 @@ const App: React.FC = () => {
         <div className='flex flex-col min-h-screen bg-white dark:bg-gradient-to-b dark:from-blue-950 dark:to-blue-900'>
             <Header/>
             <div className='w-full p-4 md:p-6 lg:p-8'>
-                <h1 className='mt-8 text-4xl font-bold'>Bracket Submission</h1>
+                <h1 className='mt-8 text-4xl font-bold'>View Submissions</h1>
                 <h4 className='text-gray-600 text-lg'>
-                    Fill out your brackets below. You can fill out up to 5 brackets.
+                You can view your brackets but changes won't be implemented!
                 </h4>
                 <div className='my-4 h-full flex flex-col gap-y-2'>
                     {brackets.map((bracket: Bracket) => (
@@ -64,7 +64,7 @@ const App: React.FC = () => {
                                     href={`/bracket/${bracket.id}`}
                                     className='px-4 py-2 bg-blue-200 text-blue-900 rounded-lg'
                                 >
-                                    Edit
+                                    View
                                 </a>
                                 <button
                                     onClick={() => handleDeleteBracket(bracket.id)}
