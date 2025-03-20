@@ -11,7 +11,7 @@ const dynamoDB = new AWS.DynamoDB.DocumentClient({
 const TABLE_NAME = 'Brackets';
 
 // get all brackets that belong to a user
-export async function GET(_request: NextRequest, { params }) {
+/*export async function GET(_request: NextRequest, { params }) {
     try {
         const q = {
             TableName: TABLE_NAME,
@@ -33,3 +33,4 @@ export async function GET(_request: NextRequest, { params }) {
         return NextResponse.json({ error: error }, { status: 500 });
     }
 }
+*/
