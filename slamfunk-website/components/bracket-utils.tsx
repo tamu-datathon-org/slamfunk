@@ -10,13 +10,13 @@ export const generateSampleMatches = () => {
       "Memphis", "Colorado St.", "Maryland", "Grand Canyon",
       "Missouri", "Drake", "Texas Tech", "UNCW",
       "Kansas", "Arkansas", "St. John's", "Omaha",
-      "Duke", "AMER/MTSM", "Miss St.", "Baylor",
+      "Duke", "St. Mary's", "Miss St.", "Baylor",
       "Oregon", "Liberty", "Arizona", "Akron",
       "BYU", "VCU", "Wisconsin", "Montana",
       "Saint Mary's", "Vanderbilt", "Alabama", "Robert Morris",
       "Houston", "SIUE", "Gonzaga", "Georgia",
       "Clemson", "McNeese", "Purdue", "High Point",
-      "Illinois", "TEX/XAV", "Kentucky", "Troy",
+      "Illinois", "Xavier", "Kentucky", "Troy",
       "UCLA", "Utah St.", "Tennessee", "Wofford"
     ];
   
