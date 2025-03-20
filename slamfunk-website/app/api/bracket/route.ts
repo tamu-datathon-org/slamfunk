@@ -28,7 +28,7 @@ export interface Bracket {
 
 // returns all brackets in the database
 // ! VERY EXPENSIVE OPERATION, SO DON'T CALL UNLESS NECESSArY
-export async function GET(_request: NextRequest) {
+/*export async function GET(_request: NextRequest) {
     const params = { TableName: TABLE_NAME };
     try {
         const data = await dynamoDB.scan(params).promise();
@@ -36,10 +36,10 @@ export async function GET(_request: NextRequest) {
     } catch (error) {
         return NextResponse.json({ error: (error as Error).message }, { status: 500 });
     }
-}
+}*/
 
 // creates a bracket in the database
-export async function POST(request: NextRequest) {
+/*export async function POST(request: NextRequest) {
     const bracket:Bracket = await request.json();
     // console.log(bracket);
     const params = { TableName: TABLE_NAME, Item: bracket };
@@ -49,6 +49,6 @@ export async function POST(request: NextRequest) {
     } catch (error) {
         return NextResponse.json({ error: (error as Error).message }, { status: 500 });
     }
-}
+} */
 
 

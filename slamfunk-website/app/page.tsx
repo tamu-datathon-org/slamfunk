@@ -211,12 +211,12 @@ export default function MarchMadnessPage() {
               Put your bracket-making skills and data science knowledge to the test!
             </p>
             <div className="flex justify-center space-x-6">
-              <Link
+              {/*<Link
                 href="/bracket"
                 className="bg-blue-500 text-white px-6 py-3 rounded-md text-lg font-semibold hover:bg-blue-600 transition duration-300"
               >
                 Start Building Now!
-              </Link>
+              </Link>*/}
             </div>
           </div>
         </section>
