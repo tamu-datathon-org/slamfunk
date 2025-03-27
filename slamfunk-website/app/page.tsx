@@ -7,6 +7,7 @@ import { FaBasketballBall, FaChartLine, FaTrophy, FaUserGraduate, FaCalendarAlt 
 import Link from "next/link";
 import MarchMadnessHero from "../components/Hero";
 import Leaderboard from "components/Leaderboard";
+import Prizes from "../components/Prizes";
 
 const Timeline = () => {
   const events = [
@@ -67,7 +68,7 @@ const MarchMadnessFAQ = () => {
     },
     {
       title: "What are the prizes?",
-      content: "Compete for awesome prizes 😎. Specific prize details will be announced soon!"
+      content: "Compete for awesome prizes 😎. Peep the section above 👀‼️"
     },
     {
       title: "How many brackets can I submit?",
@@ -133,6 +134,8 @@ export default function MarchMadnessPage() {
             </div>
           </div>
         </section>
+
+        <Prizes />
         
         <section className="container mx-auto px-4 py-16">
           <Timeline />
@@ -178,7 +181,7 @@ export default function MarchMadnessPage() {
             width={500}
             height={500}
             alt="TD March Madness Flyer"
-          />} // prob add a picture or sum
+          />} // prob add a picture or sum and also the prizes
         />
         
         <section id="faq-section">
