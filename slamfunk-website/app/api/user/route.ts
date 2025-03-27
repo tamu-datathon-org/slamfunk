@@ -17,6 +17,17 @@ export interface User {
     bestBracket: string | null;
 };
 
+// returns all users in the database
+export async function GET(_request: NextRequest) {
+    const params = { TableName: TABLE_NAME };
+    try {
+        const data = await dynamoDB.scan(params).promise();
+        return NextResponse.json(data.Items);
+    } catch (error) {
+        return NextResponse.json({ error: (error as Error).message }, { status: 500 });
+    }
+}
+
 export async function POST(request: NextRequest) {
     const user: User = await request.json();
     user.maxScore = 0;

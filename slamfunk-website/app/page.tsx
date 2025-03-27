@@ -4,7 +4,6 @@ import Footer from "components/Footer";
 import Image from "next/image";  // will use for flyer
 import Accordion from "components/Accordion";
 import { FaBasketballBall, FaChartLine, FaTrophy, FaUserGraduate, FaCalendarAlt } from "react-icons/fa";
-import Link from "next/link";
 import MarchMadnessHero from "../components/Hero";
 import Prizes from "../components/Prizes";
 
