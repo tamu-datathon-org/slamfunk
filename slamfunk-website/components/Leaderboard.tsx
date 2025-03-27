@@ -1,5 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
+import { User } from 'app/api/user/route';
 
 // Define Match and Bracket types
 
@@ -22,28 +23,22 @@ type Bracket = {
   };
 };
 
-type User = {
-  uid: string;
-  email: string;
-  name: string;
-  maxScore: number;
-  bestBracket: string | null;
-};
-
 export default function Leaderboard() {
   const [users, setUsers] = useState<User[]>([]);
   const [selectedUserId, setSelectedUserId] = useState<string | null>(null);
   const [selectedBracket, setSelectedBracket] = useState<Bracket | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch('/api/user', {
-          method: 'GET',
-        });
+        const response = await fetch('/api/user');
         const data = await response.json();
         const sortedUsers = data.sort((a: User, b: User) => b.maxScore - a.maxScore);
-        setUsers(sortedUsers);
+        const filteredUsers = sortedUsers.filter((user: User) => user.maxScore > 0); // filter out users that dont have a score
+        console.log(sortedUsers);
+        setUsers(filteredUsers);
+        setLoading(false);
       } catch (error) {
         console.error('Error fetching users:', error);
       }
@@ -69,9 +64,10 @@ export default function Leaderboard() {
     }
   };
 
+  if (loading) { return <div>loading...</div>; }
+
   return (
-    <div className="my-32 mx-4 sm:mx-8 md:mx-16 lg:mx-20 relative text-black bg-gray-100 rounded-lg shadow-md">
-      <h1 className="text-2xl px-2 font-bold mb-4">March Madness Leaderboard</h1>
+    <div className="w-full relative text-black bg-gray-100 rounded-lg shadow-md overflow-hidden">
       <table className="table-auto w-full border-collapse border border-gray-200">
         <thead>
           <tr className="bg-gray-300">
@@ -85,7 +81,7 @@ export default function Leaderboard() {
             <React.Fragment key={user.uid}>
               <tr
                 className="hover:bg-gray-500 cursor-pointer transition-all duration-300 ease-in-out"
-                onClick={() => handleRowClick(user)}
+                onClick={() => console.log(user)}
               >
                 <td className="border border-gray-200 px-4 py-2 text-center">{index + 1}</td>
                 <td className="border border-gray-200 px-4 py-2 text-center">{user.name}</td>
