@@ -3,11 +3,10 @@ import Link from "next/link";
 import CountdownTimer from "./CountdownTimer";
 
 export default function MarchMadnessHero() {
-  const targetDate = "2025-04-04T23:59:59";
+  const targetDate = "2026-03-19T23:59:59";
 
   return (
     <section className="text-center my-32 mx-4 sm:mx-8 md:mx-16 lg:mx-24 relative">
-      {/* YOINKED bball */}
       <div className="absolute inset-0 -z-10 opacity-5">
         <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
           <pattern id="basketball-pattern" x="0" y="0" width="50" height="50" patternUnits="userSpaceOnUse">
@@ -21,26 +20,27 @@ export default function MarchMadnessHero() {
         </svg>
       </div>
 
-      <div className="relative">
-        <span className="inline-block px-4 py-2 bg-gradient-to-r from-blue-500 to-teal-400 text-white font-semibold rounded-md mb-6 transform -rotate-2">
-          TAMU Datathon presents
-        </span>
+      <div className="relative mb-8">
+        <h2 className="text-gray-800 dark:text-gray-200 text-sm sm:text-base md:text-lg lg:text-xl tracking-widest font-bold uppercase mb-4">
+          TAMU DATATHON PRESENTS
+        </h2>
       </div>
 
-      <h1 className="font-sans text-3xl tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl dark:text-white mb-6">
-        March Madness <span className="text-orange-500">Mania!</span>
+      <h1
+        className="text-black dark:text-white font-bold leading-none mb-6"
+        style={{
+          fontFamily: 'Harlem, sans-serif',
+          fontSize: 'clamp(4rem, 15vw, 12rem)',
+          textShadow: '4px 4px 0px rgba(0, 0, 0, 0.2)',
+          letterSpacing: '-0.02em'
+        }}
+      >
+        MARCH MADNESS
       </h1>
 
-      <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 font-light max-w-4xl mx-auto">
-        Whether you're a March Madness enthusiast, a data-driven strategist, or both, this competition offers
-        two exciting tracks: <span className="font-semibold text-teal-400">Best Bracket (now closed)</span> and
-        <span className="font-semibold text-orange-500"> Best Data Science Write-Up</span>. Compete for prizes and
-        campus recognition by predicting the tournament's outcome or showcasing your analytical skills.
-      </p>
-
       <div className="mb-4">
-        <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-300">Time Remaining until Writeups are Due!:</h3>
-        <h4 className="text-med font-semibold text-gray-700 dark:text-gray-300">April 4th, 2025 (11:59 PM)</h4>
+        <h3 className="text-sm sm:text-base tracking-widest font-bold uppercase text-gray-800 dark:text-gray-200">Time Remaining until Brackets are Due!:</h3>
+        <h4 className="text-sm sm:text-base tracking-widest font-bold uppercase text-gray-800 dark:text-gray-200">March 19, 2026 (11:59 PM)</h4>
       </div>
 
       <CountdownTimer targetDate={targetDate} />
