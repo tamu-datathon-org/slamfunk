@@ -48,7 +48,7 @@ const App: React.FC = () => {
             <div className='w-full p-4 md:p-6 lg:p-8'>
                 <h1 className='mt-8 text-4xl font-bold'>View Submissions</h1>
                 <h4 className='text-gray-600 text-lg'>
-                You can view your brackets but changes won't be implemented!
+                Manage your bracket submissions (up to 5 brackets allowed)
                 </h4>
                 <div className='my-4 h-full flex flex-col gap-y-2'>
                     {brackets.map((bracket: Bracket) => (
