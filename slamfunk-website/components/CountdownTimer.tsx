@@ -41,25 +41,48 @@ const CountdownTimer = ({ targetDate }) => {
     return time < 10 ? `0${time}` : time;
   };
 
+  const renderTimeUnit = (value, label) => {
+    const characters = formatTime(value).toString().split('');
+
+    return (
+      <div className="flex flex-col items-center gap-3">
+        <div className="flex gap-2">
+          {characters.map((char, index) => (
+            <div
+              key={index}
+              className="bg-white text-[#1e3a5f] px-6 py-4 text-5xl sm:text-6xl md:text-7xl shadow-xl border-2 border-gray-200"
+              style={{
+                fontFamily: 'Bayon, sans-serif',
+                fontWeight: 'normal'
+              }}
+            >
+              {char}
+            </div>
+          ))}
+        </div>
+        <span className="text-lg sm:text-xl md:text-2xl uppercase font-bold text-white tracking-widest">
+          {label}
+        </span>
+      </div>
+    );
+  };
+
+  const renderColon = () => (
+    <div className="flex flex-col items-center justify-center mx-2 mb-12">
+      <span className="text-5xl sm:text-6xl md:text-7xl text-white font-bold">:</span>
+    </div>
+  );
+
   return (
-    <div className="flex justify-center mb-12">
-      <div className="grid grid-cols-4 gap-4 text-center">
-        <div className="bg-gray-100 dark:bg-gray-800 p-3 rounded-lg">
-          <div className="text-3xl font-bold text-orange-500">{formatTime(days)}</div>
-          <div className="text-xs uppercase text-gray-600 dark:text-gray-400">Days</div>
-        </div>
-        <div className="bg-gray-100 dark:bg-gray-800 p-3 rounded-lg">
-          <div className="text-3xl font-bold text-maroon-700">{formatTime(hours)}</div>
-          <div className="text-xs uppercase text-gray-600 dark:text-gray-400">Hours</div>
-        </div>
-        <div className="bg-gray-100 dark:bg-gray-800 p-3 rounded-lg">
-          <div className="text-3xl font-bold text-orange-500">{formatTime(minutes)}</div>
-          <div className="text-xs uppercase text-gray-600 dark:text-gray-400">Minutes</div>
-        </div>
-        <div className="bg-gray-100 dark:bg-gray-800 p-3 rounded-lg">
-          <div className="text-3xl font-bold text-maroon-700">{formatTime(seconds)}</div>
-          <div className="text-xs uppercase text-gray-600 dark:text-gray-400">Seconds</div>
-        </div>
+    <div className="flex justify-center mb-8 overflow-x-auto px-4">
+      <div className="flex items-start gap-2 sm:gap-4">
+        {renderTimeUnit(days, 'DAYS')}
+        {renderColon()}
+        {renderTimeUnit(hours, 'HOURS')}
+        {renderColon()}
+        {renderTimeUnit(minutes, 'MINUTES')}
+        {renderColon()}
+        {renderTimeUnit(seconds, 'SECONDS')}
       </div>
     </div>
   );

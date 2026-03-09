@@ -1,63 +1,87 @@
 "use client";
 import Link from "next/link";
 import CountdownTimer from "./CountdownTimer";
+import Image from "next/image";
 
 export default function MarchMadnessHero() {
-  const targetDate = "2025-04-04T23:59:59";
+  const targetDate = "2026-03-19T23:59:59";
 
   return (
-    <section className="text-center my-32 mx-4 sm:mx-8 md:mx-16 lg:mx-24 relative">
-      {/* YOINKED bball */}
-      <div className="absolute inset-0 -z-10 opacity-5">
-        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-          <pattern id="basketball-pattern" x="0" y="0" width="50" height="50" patternUnits="userSpaceOnUse">
-            <circle cx="25" cy="25" r="12" fill="none" stroke="#F97316" strokeWidth="2" />
-            <path d="M13,25 H37" stroke="#F97316" strokeWidth="2" />
-            <path d="M25,13 V37" stroke="#F97316" strokeWidth="2" />
-            <path d="M17,17 Q25,25 33,33" stroke="#F97316" strokeWidth="2" fill="none" />
-            <path d="M17,33 Q25,25 33,17" stroke="#F97316" strokeWidth="2" fill="none" />
-          </pattern>
-          <rect width="100%" height="100%" fill="url(#basketball-pattern)" />
-        </svg>
+    <section className="relative min-h-screen w-full overflow-hidden">
+      <div className="absolute inset-0 bg-[#1e3a5f]">
+        <Image
+          src="/background.svg"
+          alt="Background"
+          fill
+          className="object-cover opacity-30"
+          priority
+        />
+      </div>
+      <div className="absolute left-0 bottom-0 w-[35%] md:w-[30%] h-[90%] hidden sm:block">
+        <Image
+          src="/left_player.svg"
+          alt="Basketball Player Left"
+          fill
+          className="object-contain object-bottom-left"
+          style={{ objectPosition: 'left bottom' }}
+        />
+      </div>
+      <div className="absolute right-0 bottom-0 w-[32%] md:w-[27%] h-[85%] hidden sm:block">
+        <Image
+          src="/right_player.svg"
+          alt="Basketball Player Right"
+          fill
+          className="object-contain object-bottom-right"
+          style={{ objectPosition: 'right bottom' }}
+        />
       </div>
 
-      <div className="relative">
-        <span className="inline-block px-4 py-2 bg-gradient-to-r from-blue-500 to-teal-400 text-white font-semibold rounded-md mb-6 transform -rotate-2">
-          TAMU Datathon presents
-        </span>
-      </div>
-
-      <h1 className="font-sans text-3xl tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl dark:text-white mb-6">
-        March Madness <span className="text-orange-500">Mania!</span>
-      </h1>
-
-      <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 font-light max-w-4xl mx-auto">
-        Whether you're a March Madness enthusiast, a data-driven strategist, or both, this competition offers
-        two exciting tracks: <span className="font-semibold text-teal-400">Best Bracket (now closed)</span> and
-        <span className="font-semibold text-orange-500"> Best Data Science Write-Up</span>. Compete for prizes and
-        campus recognition by predicting the tournament's outcome or showcasing your analytical skills.
-      </p>
-
-      <div className="mb-4">
-        <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-300">Time Remaining until Writeups are Due!:</h3>
-        <h4 className="text-med font-semibold text-gray-700 dark:text-gray-300">April 4th, 2025 (11:59 PM)</h4>
-      </div>
-
-      <CountdownTimer targetDate={targetDate} />
-
-      <div className="flex justify-center space-x-6 mt-6">
-        <Link
-          href="/bracket"
-          className="bg-white text-black px-6 py-3 rounded-md text-lg font-semibold hover:opacity-90 transition duration-300 transform hover:-translate-y-1"
-        >
-          Build a Bracket
-        </Link>
-        <Link
-          href="/writeup"
-          className="bg-orange-500 text-white px-6 py-3 rounded-md text-lg font-semibold hover:opacity-90 transition duration-300 transform hover:-translate-y-1"
-        >
-          Writeups
-        </Link>
+      <div className="relative z-10 flex flex-col items-center justify-start min-h-screen px-4 pt-16 pb-12">
+        <div className="mb-8">
+          <Image
+            src="/topped.svg"
+            alt="March Madness"
+            width={1400}
+            height={350}
+            className="w-full max-w-7xl h-auto"
+            priority
+          />
+        </div>
+        <div className="mb-8 text-center">
+          <h3 className="text-white text-2xl sm:text-3xl md:text-4xl font-bold uppercase tracking-wider mb-2">
+            TIME UNTIL WRITE UPS ARE DUE:
+          </h3>
+          <h4 className="text-white text-xl sm:text-2xl md:text-3xl font-bold uppercase tracking-wide">
+            MARCH 19, 2026 (11:59 PM)
+          </h4>
+        </div>
+        <CountdownTimer targetDate={targetDate} />
+        <div className="flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-4 mt-8">
+          <Link
+            href="/bracket"
+            className="hover:opacity-90 transition duration-300 transform hover:scale-105 w-96 sm:w-[28rem] md:w-[32rem]"
+          >
+            <Image
+              src="/build_button.svg"
+              alt="Build a Bracket"
+              width={400}
+              height={100}
+              className="w-full h-auto"
+            />
+          </Link>
+          <Link
+            href="/writeup"
+            className="hover:opacity-90 transition duration-300 transform hover:scale-105 w-96 sm:w-[28rem] md:w-[32rem]"
+          >
+            <Image
+              src="/writeups.svg"
+              alt="Writeups"
+              width={400}
+              height={100}
+              className="w-full h-auto"
+            />
+          </Link>
+        </div>
       </div>
     </section>
   );
