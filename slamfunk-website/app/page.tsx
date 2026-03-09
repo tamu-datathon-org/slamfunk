@@ -33,20 +33,20 @@ const Timeline = () => {
       </h2>
       <div className="relative">
         <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-blue-500 to-teal-400"></div>
-        
+
         {events.map((event, index) => (
           <div key={index} className={`flex items-center mb-12 ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}>
             <div className={`w-5/12 ${index % 2 === 0 ? 'text-right pr-8' : 'text-left pl-8'}`}>
               <h3 className="text-xl font-bold text-gray-900 dark:text-white">{event.title}</h3>
               <p className="text-gray-600 dark:text-gray-300">{event.description}</p>
             </div>
-            
+
             <div className="w-2/12 flex justify-center">
               <div className="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center z-10">
                 <FaCalendarAlt className="text-white" />
               </div>
             </div>
-            
+
             <div className={`w-5/12 ${index % 2 === 0 ? 'text-left pl-8' : 'text-right pr-8'}`}>
               <span className="text-teal-500 font-bold">{event.date}</span>
             </div>
@@ -57,7 +57,7 @@ const Timeline = () => {
   );
 };
 
-//faq items 
+//faq items
 const MarchMadnessFAQ = () => {
   const faqItems = [
     {
@@ -89,9 +89,10 @@ export default function MarchMadnessPage() {
   return (
     <div className="flex flex-col min-h-screen bg-white dark:bg-gradient-to-b dark:from-blue-950 dark:to-blue-900">
       <Header />
+
       <main>
         <MarchMadnessHero />
-        
+
         <section id="competition-tracks" className="container mx-auto px-4 py-16 bg-gradient-to-b from-blue-50 to-blue-100 dark:from-blue-950 dark:to-blue-900 transition-colors duration-200 rounded-lg">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
@@ -134,11 +135,11 @@ export default function MarchMadnessPage() {
         </section>
 
         <Prizes />
-        
+
         <section className="container mx-auto px-4 py-16">
           <Timeline />
         </section>
-        
+
         <Section
           leftHalf={
             <>
@@ -173,7 +174,7 @@ export default function MarchMadnessPage() {
               </ul>
             </>
           }
- 
+
           rightHalf={<Image
             src="/mmflyer.png"
             width={500}
@@ -181,7 +182,7 @@ export default function MarchMadnessPage() {
             alt="TD March Madness Flyer"
           />} // prob add a picture or sum and also the prizes
         />
-        
+
         <section id="faq-section">
           <Section
             leftHalf={<MarchMadnessFAQ />}
@@ -197,7 +198,7 @@ export default function MarchMadnessPage() {
             }
           />
         </section>
-        
+
         <section className="py-16 bg-blue-50 dark:bg-blue-900">
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl mb-6 text-gray-900 dark:text-white">
