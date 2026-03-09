@@ -78,7 +78,7 @@ export default function WriteupPage() {
             fileName={writeupData.filename}
             bracketId={bracketId}
           />
-        ) : new Date() < new Date(2025, 3, 4) ? (
+        ) : new Date() < new Date(2026, 3, 4) ? (
           <SubmissionUi
             userId={session.user.id}
             submitted={submitted}

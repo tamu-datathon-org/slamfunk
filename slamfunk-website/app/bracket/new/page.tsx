@@ -31,9 +31,9 @@ export default function NewBracket() {
         <div className='flex flex-col min-h-screen bg-white dark:bg-gradient-to-b dark:from-blue-950 dark:to-blue-900'>
             <Header/>
             <div className='w-full p-4 md:p-6 lg:p-8'>
-                <h1 className='mt-8 text-4xl font-bold'>View Bracket</h1>
+                <h1 className='mt-8 text-4xl font-bold'>Create New Bracket</h1>
                 <h4 className='text-gray-600 text-lg'>
-                    You can view your brackets but changes won't be implemented!
+                    Fill out your March Madness bracket and submit your predictions
                 </h4>
                 <MarchMadnessBracket
                     initialMatches={generateSampleMatches()}
