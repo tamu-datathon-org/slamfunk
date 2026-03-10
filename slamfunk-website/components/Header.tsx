@@ -130,16 +130,16 @@ export default function Header() {
                 <div className="flex items-center gap-2 flex-shrink-0">
                     {status === "authenticated" ? (
                         <button onClick={handleSignOut}
-                            className="hidden md:inline-flex items-center text-sm font-medium text-gray-600 dark:text-blue-200 hover:text-red-500 dark:hover:text-red-400 px-3 py-2 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
+                            className="hidden md:inline-flex items-center text-sm font-bold text-gray-600 dark:text-blue-200 hover:text-red-500 dark:hover:text-red-400 px-3 py-2 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
                         >
-                        Logout
+                        LOGOUT
                         </button>
                     ) : (
                         <Link
                             href="/login"
-                            className="hidden md:inline-flex items-center text-sm font-semibold bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors shadow-sm"
+                            className="hidden md:inline-flex items-center text-sm font-semibold bg-[#17274E] hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors shadow-sm"
                         >
-                        Sign in
+                        SIGN IN
                         </Link>
                     )}
 

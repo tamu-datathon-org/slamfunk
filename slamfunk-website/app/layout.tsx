@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 import { Providers } from "./providers";
-
+import Image from "next/image";
 import "styles/globals.css";
 
 export const metadata: Metadata = {
@@ -22,10 +22,20 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className="bg-white dark:bg-black min-h-screen">
+        <div className="fixed inset-0 bg-[#1e3a5f]">
+            <Image
+                src="/background.svg"
+                alt="Background"
+                fill
+                className="object-cover"
+                priority
+            />
+        </div>
+
         <Providers>
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-          {children}
-        </ThemeProvider>
+            <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+            {children}
+            </ThemeProvider>
         </Providers>
       </body>
     </html>

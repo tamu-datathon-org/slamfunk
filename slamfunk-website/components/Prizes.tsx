@@ -26,7 +26,8 @@ export default function Prize() {
     ];
 
     return (
-        <section className="container mx-auto px-4 py-16 bg rounded-lg">
+        
+        <section className="container mx-auto px-4 py-16 bg-[#0f1e33] rounded-lg">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-12">
                     <div className="flex items-center justify-center mb-4">
@@ -44,9 +45,9 @@ export default function Prize() {
                     {prizes.map((prize, index) => (
                         <div
                             key={index}
-                            className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md transition-all duration-300 border-l-4 border-blue-500 hover:shadow-xl transform hover:-translate-y-2"
+                            className="bg-white p-6 rounded-lg shadow-md transition-all duration-300 hover:shadow-xl transform hover:-translate-y-2"
                         >
-                            <div className="h-64 w-full bg-gray-50 dark:bg-gray-700 relative rounded-md overflow-hidden mb-4">
+                            <div className="h-64 w-full relative rounded-md overflow-hidden mb-4">
                                 <Image
                                     src={prize.image}
                                     alt={prize.name}
