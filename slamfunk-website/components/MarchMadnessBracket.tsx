@@ -4,9 +4,11 @@ import { useState, useEffect, useRef } from "react"
 import type { Bracket } from "app/api/bracket/route"
 import { useRouter } from "next/navigation"
 import { Alert, AlertDescription, AlertTitle } from "../components/ui/Alert"
-import { AlertCircle, Trophy, Send, FileText } from "lucide-react"
+import { AlertCircle, Send, FileText } from "lucide-react"
 import { Button } from "../components/ui/Button"
 import Link from "next/link"
+import { getTeamLogoById, getTeamId } from "../utils/espnTeamLogos"
+import Image from "next/image"
 
 // Type definitions
 type Team = string | null
@@ -229,6 +231,9 @@ const MarchMadnessBracket: React.FC<MarchMadnessBracketProps> = ({
   const renderMatch = (round: string, matchId: string, match: Match) => {
     const { team1, team2, winner } = match
 
+    const team1Logo = team1 && getTeamId(team1) ? getTeamLogoById(getTeamId(team1)!, 500) : null
+    const team2Logo = team2 && getTeamId(team2) ? getTeamLogoById(getTeamId(team2)!, 500) : null
+
     return (
       <div key={`${round}-${matchId}`} className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-2 mb-2 text-xs">
         <div className="flex flex-col">
@@ -238,14 +243,25 @@ const MarchMadnessBracket: React.FC<MarchMadnessBracketProps> = ({
             } ${isDeadlinePassed ? "opacity-80 cursor-not-allowed" : ""}`}
             onClick={() => team1 && !isDeadlinePassed && handleWinnerSelection(round, matchId, team1)}
           >
-            <span className="truncate max-w-[80px] font-medium">{team1 || "—"}</span>
+            <div className="flex items-center gap-1 flex-1 min-w-0">
+              {team1Logo && (
+                <Image
+                  src={team1Logo}
+                  alt={team1 || ""}
+                  width={20}
+                  height={20}
+                  className="flex-shrink-0"
+                />
+              )}
+              <span className="truncate max-w-[60px] font-medium">{team1 || "—"}</span>
+            </div>
             <input
               type="radio"
               name={`${round}-${matchId}`}
               checked={winner === team1}
-              onChange={() => {}} 
+              onChange={() => {}}
               disabled={!team1 || !team2 || isDeadlinePassed}
-              className="ml-1"
+              className="ml-1 flex-shrink-0"
             />
           </div>
           <div
@@ -254,14 +270,25 @@ const MarchMadnessBracket: React.FC<MarchMadnessBracketProps> = ({
             } ${isDeadlinePassed ? "opacity-80 cursor-not-allowed" : ""}`}
             onClick={() => team2 && !isDeadlinePassed && handleWinnerSelection(round, matchId, team2)}
           >
-            <span className="truncate max-w-[80px] font-medium">{team2 || "—"}</span>
+            <div className="flex items-center gap-1 flex-1 min-w-0">
+              {team2Logo && (
+                <Image
+                  src={team2Logo}
+                  alt={team2 || ""}
+                  width={20}
+                  height={20}
+                  className="flex-shrink-0"
+                />
+              )}
+              <span className="truncate max-w-[60px] font-medium">{team2 || "—"}</span>
+            </div>
             <input
               type="radio"
               name={`${round}-${matchId}`}
               checked={winner === team2}
-              onChange={() => {}} 
+              onChange={() => {}}
               disabled={!team1 || !team2 || isDeadlinePassed}
-              className="ml-1"
+              className="ml-1 flex-shrink-0"
             />
           </div>
         </div>
@@ -290,7 +317,7 @@ const MarchMadnessBracket: React.FC<MarchMadnessBracketProps> = ({
 
     return (
       <div className="flex flex-col justify-around h-full">
-        <div className="text-center font-bold mb-2 text-sm">First Round</div>
+        <div className="text-center font-bold mb-2 text-sm" style={{ fontFamily: 'Bayon, sans-serif' }}>First Round</div>
         <div className="flex flex-col justify-around h-full">
           {Array.from({ length: 16 }).map((_, index) => {
             const matchId = `match_${startMatchId + index}`
@@ -311,7 +338,7 @@ const MarchMadnessBracket: React.FC<MarchMadnessBracketProps> = ({
 
     return (
       <div className="flex flex-col justify-around h-full">
-        <div className="text-center font-bold mb-2 text-sm">Second Round</div>
+        <div className="text-center font-bold mb-2 text-sm" style={{ fontFamily: 'Bayon, sans-serif' }}>Second Round</div>
         <div className="flex flex-col justify-around h-full">
           {Array.from({ length: 8 }).map((_, index) => {
             const matchId = `match_${startMatchId + index}`
@@ -332,7 +359,7 @@ const MarchMadnessBracket: React.FC<MarchMadnessBracketProps> = ({
 
     return (
       <div className="flex flex-col justify-around h-full space-y-4">
-        <div className="text-center font-bold mb-2 text-sm">Sweet 16</div>
+        <div className="text-center font-bold mb-2 text-sm" style={{ fontFamily: 'Bayon, sans-serif' }}>Sweet 16</div>
         <div className="flex flex-col justify-around h-full">
           {Array.from({ length: 4 }).map((_, index) => {
             const matchId = `match_${startMatchId + index}`
@@ -353,7 +380,7 @@ const MarchMadnessBracket: React.FC<MarchMadnessBracketProps> = ({
 
     return (
       <div className="flex flex-col justify-around h-full space-y-6">
-        <div className="text-center font-bold mb-2 text-sm">Elite 8</div>
+        <div className="text-center font-bold mb-2 text-sm" style={{ fontFamily: 'Bayon, sans-serif' }}>Elite 8</div>
         <div className="flex flex-col justify-around h-full">
           {Array.from({ length: 2 }).map((_, index) => {
             const matchId = `match_${startMatchId + index}`
@@ -373,7 +400,7 @@ const MarchMadnessBracket: React.FC<MarchMadnessBracketProps> = ({
 
     return (
       <div className="flex flex-col justify-around h-full space-y-8">
-        <div className="text-center font-bold mb-2 text-sm">Final Four</div>
+        <div className="text-center font-bold mb-2 text-sm" style={{ fontFamily: 'Bayon, sans-serif' }}>Final Four</div>
         <div className="flex flex-col justify-around h-full">
           {Array.from({ length: 2 }).map((_, index) => {
             const matchId = `match_${index + 1}`
@@ -393,7 +420,7 @@ const MarchMadnessBracket: React.FC<MarchMadnessBracketProps> = ({
 
     return (
       <div className="flex flex-col justify-center h-full mb-8">
-        <div className="text-center font-bold mb-2 text-sm">Championship</div>
+        <div className="text-center font-bold mb-2 text-sm" style={{ fontFamily: 'Bayon, sans-serif' }}>Championship</div>
         <div className="flex flex-col justify-center h-full">
           {roundData["match_1"]
             ? renderMatch("championship", "match_1", roundData["match_1"])
@@ -408,16 +435,15 @@ const MarchMadnessBracket: React.FC<MarchMadnessBracketProps> = ({
       {isDeadlinePassed && (
         <Alert variant="destructive" className="mb-4">
           <AlertCircle className="h-4 w-4" />
-          <AlertTitle>Submission Closed</AlertTitle>
-          <AlertDescription>
+          <AlertTitle style={{ fontFamily: 'Bayon, sans-serif' }}>Submission Closed</AlertTitle>
+          <AlertDescription style={{ fontFamily: 'Bayon, sans-serif' }}>
             The deadline for bracket submissions has passed. You can view your bracket but cannot make changes.
           </AlertDescription>
         </Alert>
       )}
 
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-2xl font-bold flex items-center">
-          <Trophy className="mr-2 h-6 w-6 text-yellow-500" />
+        <h2 className="text-2xl font-bold flex items-center" style={{ fontFamily: 'Bayon, sans-serif' }}>
           March Madness 2025
         </h2>
 

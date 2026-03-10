@@ -38,7 +38,7 @@ export default function FAQ() {
                     alt="FAQ and Rules"
                     width={100}
                     height={100}
-                    className="w-full max-w-4xl h-auto"
+                    className="w-full max-w-3xl h-auto"
                 />
             </div>
             <div style={{ fontFamily: 'Bayon, sans-serif' }} className="w-full">

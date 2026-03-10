@@ -15,6 +15,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../components/ui/Ta
 import { Input } from "../../components/ui/Input"
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "../../components/ui/Card"
 import { CheckCircle, AlertCircle, HelpCircle, Trash2 } from "lucide-react"
+import Image from "next/image"
 
 export default function WriteupPage() {
   // variables and states
@@ -66,9 +67,18 @@ export default function WriteupPage() {
   }
 
   return (
-    <div className="flex flex-col min-h-screen bg-white dark:bg-gradient-to-b dark:from-blue-950 dark:to-blue-900">
+    <div className="flex flex-col min-h-screen">
       <Header />
-      <div className="container mx-auto px-4 py-8 max-w-4xl">
+      <div className="relative w-full overflow-hidden py-8 flex-1">
+        <div className="absolute inset-0 bg-[#1e3a5f]">
+          <Image
+            src="/background.svg"
+            alt="Background"
+            fill
+            className="object-cover"
+          />
+        </div>
+        <div className="relative z-10 container mx-auto px-4 max-w-4xl">
         {writeupData && submitted ? (
           <SubmissionComplete
             userId={session.user.id}
@@ -88,6 +98,7 @@ export default function WriteupPage() {
         ) : (
           <SubmissionClosed />
         )}
+        </div>
       </div>
     </div>
   )
@@ -178,8 +189,8 @@ const YouTubeLink = (props: YouTubeLinkProps) => {
   return (
     <div className="mt-6 space-y-4">
       <div className="space-y-2">
-        <h2 className="text-xl font-bold">Paste in your YouTube link</h2>
-        <p className="text-muted-foreground">Share your bracket analysis through a YouTube video</p>
+        <h2 className="text-xl font-bold text-white" style={{ fontFamily: 'Bayon, sans-serif' }}>Paste in your YouTube link</h2>
+        <p className="text-white" style={{ fontFamily: 'Bayon, sans-serif' }}>Share your bracket analysis through a YouTube video</p>
       </div>
 
       <div className="space-y-4">
@@ -223,8 +234,8 @@ const SubmissionUi = ({ userId, submitted, setSubmitted, bracketId }: Submission
   return (
     <div className="space-y-6">
       <div className="space-y-2">
-        <h1 className="text-3xl font-bold sm:text-4xl">Writeup Submission</h1>
-        <p className="text-muted-foreground text-lg">
+        <h1 className="text-3xl font-bold sm:text-4xl text-white" style={{ fontFamily: 'Bayon, sans-serif' }}>Writeup Submission</h1>
+        <p className="text-white text-lg" style={{ fontFamily: 'Bayon, sans-serif' }}>
           You can submit either a document, video, or YouTube link to explain your bracket picks
         </p>
       </div>
@@ -234,14 +245,29 @@ const SubmissionUi = ({ userId, submitted, setSubmitted, bracketId }: Submission
         onValueChange={(value) => setActiveTab(value as WriteupType)}
         className="w-full"
       >
-        <TabsList className="grid w-full grid-cols-1 sm:grid-cols-3">
-          <TabsTrigger value={WriteupType.Document} disabled={submitted}>
+        <TabsList className="grid w-full grid-cols-1 sm:grid-cols-3 gap-2 bg-transparent p-0 h-auto">
+          <TabsTrigger
+            value={WriteupType.Document}
+            disabled={submitted}
+            className="px-6 py-3 rounded-lg font-bold text-base data-[state=active]:bg-white data-[state=active]:text-black data-[state=inactive]:bg-gray-700 data-[state=inactive]:text-white hover:bg-gray-600 transition-all"
+            style={{ fontFamily: 'Bayon, sans-serif' }}
+          >
             Document Upload
           </TabsTrigger>
-          <TabsTrigger value={WriteupType.Video} disabled={submitted}>
+          <TabsTrigger
+            value={WriteupType.Video}
+            disabled={submitted}
+            className="px-6 py-3 rounded-lg font-bold text-base data-[state=active]:bg-white data-[state=active]:text-black data-[state=inactive]:bg-gray-700 data-[state=inactive]:text-white hover:bg-gray-600 transition-all"
+            style={{ fontFamily: 'Bayon, sans-serif' }}
+          >
             Video Upload
           </TabsTrigger>
-          <TabsTrigger value={WriteupType.YouTube} disabled={submitted}>
+          <TabsTrigger
+            value={WriteupType.YouTube}
+            disabled={submitted}
+            className="px-6 py-3 rounded-lg font-bold text-base data-[state=active]:bg-white data-[state=active]:text-black data-[state=inactive]:bg-gray-700 data-[state=inactive]:text-white hover:bg-gray-600 transition-all"
+            style={{ fontFamily: 'Bayon, sans-serif' }}
+          >
             YouTube Link
           </TabsTrigger>
         </TabsList>
@@ -406,13 +432,13 @@ const SubmissionClosed = () => {
   return (
     <div className="space-y-6">
       <div className="space-y-2">
-        <h1 className="text-3xl font-bold sm:text-4xl">Writeup Submission</h1>
+        <h1 className="text-3xl font-bold sm:text-4xl text-white" style={{ fontFamily: 'Bayon, sans-serif' }}>Writeup Submission</h1>
       </div>
 
       <Alert variant="destructive">
         <AlertCircle className="h-4 w-4" />
-        <AlertTitle>Submissions Closed</AlertTitle>
-        <AlertDescription>
+        <AlertTitle style={{ fontFamily: 'Bayon, sans-serif' }}>Submissions Closed</AlertTitle>
+        <AlertDescription style={{ fontFamily: 'Bayon, sans-serif' }}>
           The deadline for writeup submissions has passed. You can no longer submit or modify your writeup.
         </AlertDescription>
       </Alert>
