@@ -1,12 +1,11 @@
 import Header from "components/Header";
-import Section from "components/Section";
 import Footer from "components/Footer";
 import Image from "next/image";  // will use for flyer
-import Accordion from "components/Accordion";
 import MarchMadnessHero from "../components/Hero";
 import Prizes from "../components/Prizes";
 import FAQ from "components/Faq";
 import Tracks from "components/Tracks";
+
 
 export default function MarchMadnessPage() {
   return (
@@ -17,10 +16,9 @@ export default function MarchMadnessPage() {
         <Tracks />
         <Prizes />
 
-
         <section className="relative w-full overflow-hidden">
           <div className="relative z-10">
-            <div className="max-w-7xl mx-auto px-4 border border-red-500">
+            <div className="max-w-7xl mx-auto px-4 ">
                 <FAQ/>
             </div>
 

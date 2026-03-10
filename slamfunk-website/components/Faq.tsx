@@ -1,6 +1,5 @@
 "use client";
 import Accordion from "./Accordion";
-import Section from "./Section";
 import Image from "next/image";
 
 const MarchMadnessFAQ = () => {
@@ -30,23 +29,21 @@ const MarchMadnessFAQ = () => {
   return <Accordion items={faqItems} />;
 };
 
-export default function FAQ(){
+export default function FAQ() {
     return (
-        <div id="faq-section" className="flex flex-col items-center mb-12">
-            <div className="mb-6">
-            <Image
-                src="/faq_text.svg"
-                alt="Faq and Rules"
-                width={1000}
-                height={100}
-                className="w-full max-w-4xl h-auto"
-            />
+        <div id="faq-section" className="w-full px-4 py-16 max-w-6xl mx-auto">
+            <div className="flex justify-center mb-6">
+                <Image
+                    src="/faq_text.svg"
+                    alt="FAQ and Rules"
+                    width={100}
+                    height={100}
+                    className="w-full max-w-4xl h-auto"
+                />
             </div>
-
-            <div style={{ fontFamily: 'Bayon, sans-serif' }}>
+            <div style={{ fontFamily: 'Bayon, sans-serif' }} className="w-full">
                 <MarchMadnessFAQ />
             </div>
-
         </div>
     );
 }
