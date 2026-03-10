@@ -67,7 +67,7 @@ const Accordion: React.FC<AccordionProps> = ({ items = defaultAccordionItems }) 
   };
 
   return (
-    <div className="w-[90%]">
+    <div className="w-full md:max-w-6xl sm:max-w-3xl mx-auto">
       {items.map((item, index) => (
         <AccordionItem
           key={index}
