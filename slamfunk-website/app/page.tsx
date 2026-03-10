@@ -1,6 +1,6 @@
 import Header from "components/Header";
 import Footer from "components/Footer";
-import Image from "next/image";  // will use for flyer
+//import Image from "next/image";  
 import MarchMadnessHero from "../components/Hero";
 import Prizes from "../components/Prizes";
 import FAQ from "components/Faq";
