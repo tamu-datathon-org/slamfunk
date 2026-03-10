@@ -6,7 +6,6 @@ import Prizes from "../components/Prizes";
 import FAQ from "components/Faq";
 import Tracks from "components/Tracks";
 
-//FIXME: until prizes are final its just gonna be commented out -layla
 
 export default function MarchMadnessPage() {
   return (
@@ -15,6 +14,16 @@ export default function MarchMadnessPage() {
       <main>
         <MarchMadnessHero />
         <Tracks />
+
+        {/* FIXME: until prizes are final - layla */}
+        <section className="relative py-16 text-center" style={{ fontFamily: 'Bayon, sans-serif' }}>
+          <h2 className="text-4xl sm:text-5xl text-white uppercase tracking-wider mb-4">
+            Prizes Coming Soon 👀
+          </h2>
+          <p className="text-2xl text-blue-300 uppercase tracking-widest">
+            follow us on instagram for updates !!
+          </p>
+        </section>
 
         {/* <Prizes /> */}
 
