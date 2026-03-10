@@ -13,7 +13,7 @@ export default function Tracks(){
                   alt="Competition Tracks"
                   width={1000}
                   height={100}
-                  className="w-full max-w-4xl h-auto"
+                  className="w-full max-w-5xl h-auto"
                 />
               </div>
               <h3
