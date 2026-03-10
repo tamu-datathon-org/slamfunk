@@ -67,7 +67,7 @@ export default function Leaderboard() {
   if (loading) { return <div>loading...</div>; }
 
   return (
-    <div className="w-full relative text-black bg-gray-100 rounded-lg shadow-md overflow-hidden">
+    <div className="relative w-full text-black bg-gray-100 rounded-lg shadow-md overflow-hidden">
       <table className="table-auto w-full border-collapse border border-gray-200">
         <thead>
           <tr className="bg-gray-300">

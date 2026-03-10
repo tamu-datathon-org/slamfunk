@@ -10,7 +10,7 @@ const MarchMadnessFAQ = () => {
     },
     {
       title: "What are the prizes?",
-      content: "Compete for awesome prizes 😎. Peep the section above 👀‼️"
+      content: "Compete for awesome prizes (Will be announced soon :) ) "
     },
     {
       title: "How many brackets can I submit?",

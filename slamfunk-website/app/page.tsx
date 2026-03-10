@@ -6,6 +6,7 @@ import Prizes from "../components/Prizes";
 import FAQ from "components/Faq";
 import Tracks from "components/Tracks";
 
+//FIXME: until prizes are final its just gonna be commented out -layla
 
 export default function MarchMadnessPage() {
   return (
@@ -14,7 +15,8 @@ export default function MarchMadnessPage() {
       <main>
         <MarchMadnessHero />
         <Tracks />
-        <Prizes />
+
+        {/* <Prizes /> */}
 
         <section className="relative w-full overflow-hidden">
           <div className="relative z-10">

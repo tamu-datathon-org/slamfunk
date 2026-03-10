@@ -52,7 +52,7 @@ const navItems: NavItem[] = [
     href: "/bracket",
   },
   {name: "WRITE-UP", href:"/writeup"},
-  {name: "RULES", href:"/rules"}
+  {name: "RULES", href:"#faq-section"}
 
 //   {
 //     name: "Resources",
@@ -123,7 +123,7 @@ export default function Header() {
                             </Link>
                         </div>
                     ))}
-                    <span className="text-white mx-3">★</span>
+                    {/* <span className="text-white mx-3">★</span> */}
                 </nav>
 
                 {/* auth button */}
