@@ -13,7 +13,7 @@ export default function MarchMadnessHero() {
           src="/background.svg"
           alt="Background"
           fill
-          className="object-cover opacity-30"
+          className="object-cover"
           priority
         />
       </div>

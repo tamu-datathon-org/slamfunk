@@ -42,7 +42,7 @@ interface MarchMadnessBracketProps {
   roundData?: Bracket
 }
 
-const SUBMISSION_DEADLINE = new Date("2025-03-21T12:00:00")
+const SUBMISSION_DEADLINE = new Date("2026-03-21T12:00:00")
 
 const MarchMadnessBracket: React.FC<MarchMadnessBracketProps> = ({
   initialMatches,
