@@ -39,7 +39,7 @@ export async function GET(_request: NextRequest) {
 }
 
 // creates a bracket in the database
-/*export async function POST(request: NextRequest) {
+export async function POST(request: NextRequest) {
     const bracket:Bracket = await request.json();
     // console.log(bracket);
     const params = { TableName: TABLE_NAME, Item: bracket };
@@ -49,6 +49,6 @@ export async function GET(_request: NextRequest) {
     } catch (error) {
         return NextResponse.json({ error: (error as Error).message }, { status: 500 });
     }
-} */
+}
 
 

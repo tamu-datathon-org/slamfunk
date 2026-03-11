@@ -51,7 +51,7 @@ export default function Leaderboard() {
     setSelectedUserId(selectedUserId === user.uid ? null : user.uid);
     if (user.bestBracket && selectedUserId !== user.uid) {
       try {
-        const bracketResponse = await fetch(`/api/bracket/${user.bestBracket}`);
+        const bracketResponse = await fetch(`/api/bracket/get/${user.bestBracket}`);
         if (!bracketResponse.ok) throw new Error('Failed to fetch bracket');
         const bracketData = await bracketResponse.json();
         setSelectedBracket(bracketData);
@@ -81,7 +81,7 @@ export default function Leaderboard() {
             <React.Fragment key={user.uid}>
               <tr
                 className="hover:bg-gray-500 cursor-pointer transition-all duration-300 ease-in-out"
-                onClick={() => console.log(user)}
+                onClick={() => handleRowClick(user)}
               >
                 <td className="border border-gray-200 px-4 py-2 text-center">{index + 1}</td>
                 <td className="border border-gray-200 px-4 py-2 text-center">{user.name}</td>
