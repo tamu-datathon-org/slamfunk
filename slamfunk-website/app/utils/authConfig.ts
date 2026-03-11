@@ -12,9 +12,11 @@ export const authConfig = {
     callbacks: {
         async signIn({ user, account, profile }) {
             if (account?.provider === "google" && profile?.email) {
-                // create user in database only if it doesn't exist'
-                const res = await fetch(`${process.env.NEXTAUTH_URL}/api/user/${profile.email}`); if (res.status === 404) {
-                    await fetch(`${process.env.NEXTAUTH_URL}/api/user`, {
+                // create user in database only if it doesn't exist
+                const baseUrl = process.env.NEXTAUTH_URL || 'https://mm.tamudatathon.com';
+                const res = await fetch(`${baseUrl}/api/user/${profile.email}`);
+                if (res.status === 404) {
+                    await fetch(`${baseUrl}/api/user`, {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
