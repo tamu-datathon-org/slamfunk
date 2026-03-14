@@ -5,42 +5,44 @@ import Image from 'next/image';
 export default function Prizes() {
     const prizes = [
         {
-            image: "/airfryer.jpg",
-            name: "Ninja Air Fryer",
-            description: "Got the eats? Get this air fryer!",
+            image: "/jersey.png",
+            name: "Texas A&M Football Jersey",
+            description: "Let's go Aggies! - Micheal Jordan",
             position: "1st Place - Best Bracket"
         },
         {
-            image: "/beats.avif",
-            name: "Beats Headphones",
-            description: "Dr. Dre personally handcrafted these headphones.",
+            image: "/dot_nobackground.png",
+            name: "Amazon Echo Dot",
+            description: "Will always be there to greet you when you come home. ",
             position: "1st Place - Data Science Write-Up"
         },
         {
-            image: "/camera.jpg",
-            name: "FujiFilm Instax",
-            description: "Take some heater pics with this cam cam",
+            image: "/mouse_p.png",
+            name: "LogiTech G502 Gaming Mouse",
+            description: "You can't blame bad aim on your mouse any more.",
             position: "Runner-Up Prizes"
         }
     ];
 
     return (
         <section className="mx-4 sm:mx-8 lg:mx-auto max-w-7xl px-4 py-16 rounded-lg">
-            <div className="mb-6 flex justify-center">
+            <div className="relative flex justify-center mb-6">
                 <Image
-                    src="/prize.svg"
+                    src="/PRIZES.svg"
                     alt="Prizes"
-                    width={1000}
+                    width={200}
                     height={100}
-                    className="w-full max-w-4xl h-auto"
+                    className="h-auto"
                 />
             </div>
-
+            <p className="relative py-4 text-center text-2xl text-white uppercase">
+                Winners are able to choose from any of the following...
+            </p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {prizes.map((prize, index) => (
                     <div
                         key={index}
-                        className="bg-white p-6 rounded-lg shadow-md transition-all duration-300 hover:shadow-xl transform hover:-translate-y-2"
+                        className="border-4 border-[#F45206] outline outline-4 outline-[#051231] p-6 rounded-lg shadow-md transition-all duration-300 hover:shadow-xl transform hover:-translate-y-2"
                     >
                         <div className="h-64 w-full relative rounded-md overflow-hidden mb-4">
                             <Image
@@ -52,9 +54,9 @@ export default function Prizes() {
                             />
                         </div>
 
-                        <div className="bg-blue-500 text-white text-sm font-bold py-1 px-3 rounded-full inline-block mb-3">
+                        {/* <div className="bg-blue-500 text-white text-sm font-bold py-1 px-3 rounded-full inline-block mb-3">
                             {prize.position}
-                        </div>
+                        </div> */}
 
                         <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-2">
                             {prize.name}

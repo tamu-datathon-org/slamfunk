@@ -36,9 +36,9 @@ export default function FAQ() {
                 <Image
                     src="/faq_text.svg"
                     alt="FAQ and Rules"
-                    width={100}
+                    width={400}
                     height={100}
-                    className="w-full max-w-3xl h-auto"
+                    className="h-auto"
                 />
             </div>
             <div style={{ fontFamily: 'Bayon, sans-serif' }} className="w-full">

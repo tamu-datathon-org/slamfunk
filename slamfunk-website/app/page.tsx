@@ -1,6 +1,6 @@
 import Header from "components/Header";
 import Footer from "components/Footer";
-//import Image from "next/image";  
+//import Image from "next/image";
 import MarchMadnessHero from "../components/Hero";
 import Prizes from "../components/Prizes";
 import FAQ from "components/Faq";
@@ -16,16 +16,16 @@ export default function MarchMadnessPage() {
         <Tracks />
 
         {/* FIXME: until prizes are final - layla */}
-        <section className="relative py-16 text-center" style={{ fontFamily: 'Bayon, sans-serif' }}>
+        {/* <section className="relative py-16 text-center" style={{ fontFamily: 'Bayon, sans-serif' }}>
           <h2 className="text-4xl sm:text-5xl text-white uppercase tracking-wider mb-4">
             Prizes Coming Soon 👀
           </h2>
           <p className="text-2xl text-blue-300 uppercase tracking-widest">
             follow us on instagram for updates !!
           </p>
-        </section>
+        </section> */}
 
-        {/* <Prizes /> */}
+        <Prizes />
 
         <section className="relative w-full overflow-hidden">
           <div className="relative z-10">
