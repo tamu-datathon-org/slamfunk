@@ -11,12 +11,12 @@ const dynamoDB = new AWS.DynamoDB.DocumentClient({
 
 const TABLE_NAME = 'Brackets';
 
-export async function GET(_request: NextRequest, { params }) {
-    const { bid } = params;
+export async function GET(_request: NextRequest, { params }: { params: Promise<{ bid: string }> }) {
+    const { bid } = await params;
     const paramsDB = { TableName: TABLE_NAME, Key: { id: bid } };
     try {
         const data = await dynamoDB.get(paramsDB).promise();
-        const bracket = data.Item as Bracket || null; 
+        const bracket = data.Item as Bracket || null;
         if (!bracket) {
             return NextResponse.json({ error: 'Bracket not found' }, { status: 404 });
         } else {

@@ -85,6 +85,7 @@ const MarchMadnessBracket: React.FC<MarchMadnessBracketProps> = ({
   const bracketRef = useRef<HTMLDivElement>(null)
   const [isSaving, setIsSaving] = useState(false)
   const [isDeadlinePassed, setIsDeadlinePassed] = useState(false)
+  const [showSuccessModal, setShowSuccessModal] = useState(false)
 
   useEffect(() => {
     const now = new Date()
@@ -206,6 +207,7 @@ const MarchMadnessBracket: React.FC<MarchMadnessBracketProps> = ({
 
     setIsSaving(true)
     try {
+      console.log("Submitting bracket:", bracket)
       const response = await fetch("/api/bracket", {
         method: "POST",
         headers: {
@@ -214,15 +216,25 @@ const MarchMadnessBracket: React.FC<MarchMadnessBracketProps> = ({
         body: JSON.stringify(bracket),
       })
 
+      console.log("Response status:", response.status)
+      const result = await response.json()
+      console.log("Response body:", result)
+
       if (!response.ok) {
+        alert(`Failed to submit bracket: ${result.error || response.statusText}`)
         throw new Error(`Failed to send bracket: ${response.statusText}`)
       }
 
-      const result = await response.json()
       console.log("Bracket successfully sent:", result)
-      router.push("/bracket")
+      setShowSuccessModal(true)
+
+      // Delay navigation to allow DynamoDB to propagate the data
+      setTimeout(() => {
+        router.push("/bracket")
+      }, 1500)
     } catch (error) {
       console.error("Error sending bracket:", error)
+      alert(`Error submitting bracket: ${error.message}`)
     } finally {
       setIsSaving(false)
     }
@@ -432,6 +444,28 @@ const MarchMadnessBracket: React.FC<MarchMadnessBracketProps> = ({
 
   return (
     <div className="w-full p-4 rounded-lg font-sans bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+      {showSuccessModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-8 max-w-md mx-4">
+            <h2 className="text-2xl font-bold text-center mb-4 text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-orange-600" style={{ fontFamily: 'Bayon, sans-serif' }}>
+              Slam Dunk!
+            </h2>
+            <p className="text-center text-gray-700 dark:text-gray-300 mb-6" style={{ fontFamily: 'Bayon, sans-serif' }}>
+              Your bracket has been submitted successfully!
+            </p>
+            <div className="flex justify-center">
+              <button
+                onClick={() => setShowSuccessModal(false)}
+                className="px-6 py-2 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-lg font-bold hover:from-orange-600 hover:to-orange-700 transition-all"
+                style={{ fontFamily: 'Bayon, sans-serif' }}
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {isDeadlinePassed && (
         <Alert variant="destructive" className="mb-4">
           <AlertCircle className="h-4 w-4" />
@@ -449,16 +483,21 @@ const MarchMadnessBracket: React.FC<MarchMadnessBracketProps> = ({
 
         <div className="flex space-x-2">
 
-          <Button onClick={exportBracket} disabled={isDeadlinePassed || isSaving} className="flex items-center">
+          <button
+            onClick={exportBracket}
+            disabled={isDeadlinePassed || isSaving}
+            className="flex items-center px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-lg font-bold text-lg hover:from-orange-600 hover:to-orange-700 transition-all shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:from-orange-500 disabled:hover:to-orange-600"
+            style={{ fontFamily: 'Bayon, sans-serif' }}
+          >
             {isSaving ? (
               <>Saving...</>
             ) : (
               <>
-                <Send className="mr-2 h-4 w-4" />
+                <Send className="mr-2 h-5 w-5" />
                 Submit Bracket
               </>
             )}
-          </Button>
+          </button>
         </div>
       </div>
 

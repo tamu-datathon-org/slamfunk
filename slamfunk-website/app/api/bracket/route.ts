@@ -40,13 +40,23 @@ export async function GET(_request: NextRequest) {
 
 // creates a bracket in the database
 export async function POST(request: NextRequest) {
-    const bracket:Bracket = await request.json();
-    // console.log(bracket);
-    const params = { TableName: TABLE_NAME, Item: bracket };
     try {
+        const bracket:Bracket = await request.json();
+        console.log("Received bracket for submission:", {
+            id: bracket.id,
+            user_id: bracket.user_id,
+            roundsCount: Object.keys(bracket.rounds).length
+        });
+
+        const params = { TableName: TABLE_NAME, Item: bracket };
+        console.log("Attempting to save to DynamoDB...");
+
         await dynamoDB.put(params).promise();
+        console.log("Bracket saved successfully!");
+
         return NextResponse.json({ message: 'Bracket created successfully' }, { status: 201 });
     } catch (error) {
+        console.error("Error creating bracket:", error);
         return NextResponse.json({ error: (error as Error).message }, { status: 500 });
     }
 }

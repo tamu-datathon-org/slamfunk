@@ -1,34 +1,51 @@
-//ts basically populates the bracket
+//ts basically populates the bracket - 2025 March Madness Official Matchups
 
 export const generateSampleMatches = () => {
-    const teams = [
-      "Auburn", "Alabama St.", "Louisville", "Creighton",
-      "Michigan", "UC San Diego", "Texas A&M", "Yale",
-      "Ole Miss", "North Carolina", "Iowa St.", "Lipscomb",
-      "Marquette", "New Mexico", "Michigan St.", "Bryant",
-      "Florida", "Norfolk St.", "UConn", "Oklahoma",
-      "Memphis", "Colorado St.", "Maryland", "Grand Canyon",
-      "Missouri", "Drake", "Texas Tech", "UNCW",
-      "Kansas", "Arkansas", "St. John's", "Omaha",
-      "Duke", "St. Mary's", "Miss St.", "Baylor",
-      "Oregon", "Liberty", "Arizona", "Akron",
-      "BYU", "VCU", "Wisconsin", "Montana",
-      "Saint Mary's", "Vanderbilt", "Alabama", "Robert Morris",
-      "Houston", "SIUE", "Gonzaga", "Georgia",
-      "Clemson", "McNeese", "Purdue", "High Point",
-      "Illinois", "Xavier", "Kentucky", "Troy",
-      "UCLA", "Utah St.", "Tennessee", "Wofford"
-    ];
-  
-    const round64: { [key: string]: { team1: string; team2: string } } = {};
-    
-    for (let i = 0; i < 32; i++) {
-      round64[`match_${i + 1}`] = {
-        team1: teams[i * 2],
-        team2: teams[i * 2 + 1]
-      };
-    }
-    
+    // Official 2025 March Madness First Round Matchups
+    // Bracket Layout: Top Left = East, Bottom Left = South, Top Right = West, Bottom Right = Midwest
+
+    const round64: { [key: string]: { team1: string; team2: string } } = {
+      // EAST REGION (Top Left - Washington D.C.)
+      "match_1": { team1: "Duke", team2: "Siena" },
+      "match_2": { team1: "Ohio St", team2: "TCU" },
+      "match_3": { team1: "St John's", team2: "Northern Iowa" },
+      "match_4": { team1: "Kansas", team2: "Cal Baptist" },
+      "match_5": { team1: "Louisville", team2: "South Florida" },
+      "match_6": { team1: "Michigan St", team2: "North Dakota St" },
+      "match_7": { team1: "UCLA", team2: "UCF" },
+      "match_8": { team1: "UConn", team2: "Furman" },
+
+      // SOUTH REGION (Bottom Left - Houston)
+      "match_9": { team1: "Florida", team2: "Prairie View A&M/Lehigh" },
+      "match_10": { team1: "Clemson", team2: "Iowa" },
+      "match_11": { team1: "Vanderbilt", team2: "McNeese" },
+      "match_12": { team1: "Nebraska", team2: "Troy" },
+      "match_13": { team1: "North Carolina", team2: "VCU" },
+      "match_14": { team1: "Illinois", team2: "Penn" },
+      "match_15": { team1: "Saint Mary's", team2: "Texas A&M" },
+      "match_16": { team1: "Houston", team2: "Idaho" },
+
+      // WEST REGION (Top Right - San Jose)
+      "match_17": { team1: "Arizona", team2: "LIU" },
+      "match_18": { team1: "Villanova", team2: "Utah St" },
+      "match_19": { team1: "Wisconsin", team2: "High Point" },
+      "match_20": { team1: "Arkansas", team2: "Hawai'i" },
+      "match_21": { team1: "BYU", team2: "Texas/NC State" },
+      "match_22": { team1: "Gonzaga", team2: "Kennesaw St" },
+      "match_23": { team1: "Miami (FL)", team2: "Missouri" },
+      "match_24": { team1: "Purdue", team2: "Queens" },
+
+      // MIDWEST REGION (Bottom Right - Chicago)
+      "match_25": { team1: "Michigan", team2: "UMBC/Howard" },
+      "match_26": { team1: "Georgia", team2: "Saint Louis" },
+      "match_27": { team1: "Texas Tech", team2: "Akron" },
+      "match_28": { team1: "Alabama", team2: "Hofstra" },
+      "match_29": { team1: "Tennessee", team2: "Miami (OH)/SMU" },
+      "match_30": { team1: "Virginia", team2: "Wright St" },
+      "match_31": { team1: "Kentucky", team2: "Santa Clara" },
+      "match_32": { team1: "Iowa St", team2: "Tennessee St" },
+    };
+
     return {
       rounds: round64
     };

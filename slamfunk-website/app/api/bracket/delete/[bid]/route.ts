@@ -9,14 +9,15 @@ const dynamoDB = new AWS.DynamoDB.DocumentClient({
 
 const TABLE_NAME = 'Brackets';
 
-/*export async function DELETE(_request: NextRequest, { params }) {
+export async function DELETE(_request: NextRequest, { params }: { params: Promise<{ bid: string }> }) {
     try {
-        const q = { TableName: TABLE_NAME, Key: { id: params.bid } };
+        const { bid } = await params;
+        const q = { TableName: TABLE_NAME, Key: { id: bid } };
         await dynamoDB.delete(q).promise();
         return NextResponse.json({ message: 'bracket deleted' }, { status: 200 });
     } catch (error) {
         console.error(error);
-        return NextResponse.json({ error: error }, { status: 500 });
+        return NextResponse.json({ error: error.message || "Unknown error" }, { status: 500 });
     }
-}*/
+}
 
