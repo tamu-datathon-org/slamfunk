@@ -4,7 +4,7 @@ import CountdownTimer from "./CountdownTimer";
 import Image from "next/image";
 
 export default function MarchMadnessHero() {
-  const targetDate = "2026-03-15T17:00:00";
+  const targetDate = "2026-03-19T12:00:00";
 
   return (
     <section className="relative min-h-screen w-full overflow-hidden">
@@ -52,7 +52,7 @@ export default function MarchMadnessHero() {
             TIME UNTIL BRACKETS OPEN:
           </h3>
           <h4 className="text-white text-xl sm:text-2xl md:text-3xl font-bold uppercase tracking-wide">
-            MARCH 15, 2026 (5:00 PM CST)
+            MARCH 19, 2026 (12:00 PM CST)
           </h4>
         </div>
         <CountdownTimer targetDate={targetDate} />

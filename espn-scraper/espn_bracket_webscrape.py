@@ -58,7 +58,7 @@ try:
             except ValueError:
                 print("Error parsing scores — skipping match.")
 
-    matches = matches[:-4] # Remove the first four matches 
+    matches = matches[:-4] # Remove the last four matches 
 except Exception as e:
     print(f"Error extracting matches: {e}")
     exit()
