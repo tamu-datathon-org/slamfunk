@@ -48,11 +48,12 @@ export default function Leaderboard() {
   if (loading) { return <div>loading...</div>; }
 
   return (
-    <div className="relative w-full text-black bg-gray-100 rounded-lg shadow-md overflow-hidden">
+    <div className="relative w-full text-black bg-gray-100 rounded-lg shadow-md">
       <div className="bg-blue-100 dark:bg-blue-900 px-4 py-3 text-sm text-gray-700 dark:text-gray-200 border-b border-gray-200">
         Click on any name to view their best performing bracket
       </div>
-      <table className="table-auto w-full border-collapse border border-gray-200">
+      <div className="overflow-x-auto">
+        <table className="table-auto w-full border-collapse border border-gray-200">
         <thead>
           <tr className="bg-gray-300">
             <th className="border border-gray-200 px-1 py-2">#</th>
@@ -73,10 +74,10 @@ export default function Leaderboard() {
               </tr>
               {selectedUserId === user.uid && (
                 <tr>
-                  <td colSpan={3} className="p-0 bg-white">
+                  <td colSpan={3} className="p-4 bg-white border border-gray-200">
                     {user.bestBracket ? (
                       selectedBracket ? (
-                        <div className="w-full overflow-x-auto">
+                        <div className="w-full overflow-x-auto overflow-y-hidden border border-gray-300 rounded-lg" style={{ maxHeight: '700px' }}>
                           <MarchMadnessBracket
                             roundData={selectedBracket}
                             userID={user.uid}
@@ -85,10 +86,10 @@ export default function Leaderboard() {
                           />
                         </div>
                       ) : (
-                        <div className="text-red-500 p-4">Error loading bracket.</div>
+                        <div className="text-red-500">Error loading bracket.</div>
                       )
                     ) : (
-                      <div className="text-gray-500 p-4">No bracket submitted yet</div>
+                      <div className="text-gray-500">No bracket submitted yet</div>
                     )}
                   </td>
                 </tr>
@@ -97,6 +98,7 @@ export default function Leaderboard() {
           ))}
         </tbody>
       </table>
+      </div>
     </div>
   );
 }
