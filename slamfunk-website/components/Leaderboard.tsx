@@ -1,27 +1,8 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import { User } from 'app/api/user/route';
-
-// Define Match and Bracket types
-
-type Match = {
-  team1: string;
-  team2: string;
-  winner: string;
-};
-
-type Bracket = {
-  id: string;
-  user_id: string;
-  rounds: {
-    round_64: Record<string, Match>;
-    round_32: Record<string, Match>;
-    sweet_16: Record<string, Match>;
-    elite_8: Record<string, Match>;
-    final_4: Record<string, Match>;
-    championship: Record<string, Match>;
-  };
-};
+import MarchMadnessBracket from './MarchMadnessBracket';
+import { Bracket } from 'app/api/bracket/route';
 
 export default function Leaderboard() {
   const [users, setUsers] = useState<User[]>([]);
@@ -68,6 +49,9 @@ export default function Leaderboard() {
 
   return (
     <div className="relative w-full text-black bg-gray-100 rounded-lg shadow-md overflow-hidden">
+      <div className="bg-blue-100 dark:bg-blue-900 px-4 py-3 text-sm text-gray-700 dark:text-gray-200 border-b border-gray-200">
+        Click on any name to view their best performing bracket
+      </div>
       <table className="table-auto w-full border-collapse border border-gray-200">
         <thead>
           <tr className="bg-gray-300">
@@ -89,17 +73,22 @@ export default function Leaderboard() {
               </tr>
               {selectedUserId === user.uid && (
                 <tr>
-                  <td colSpan={3} className="p-4 bg-white shadow-md rounded-lg">
+                  <td colSpan={3} className="p-0 bg-white">
                     {user.bestBracket ? (
                       selectedBracket ? (
-                        <pre className="text-sm mt-2">
-                          {JSON.stringify(selectedBracket.rounds, null, 2)}
-                        </pre>
+                        <div className="w-full overflow-x-auto">
+                          <MarchMadnessBracket
+                            roundData={selectedBracket}
+                            userID={user.uid}
+                            submissionId={selectedBracket.id}
+                            readOnly={true}
+                          />
+                        </div>
                       ) : (
-                        <div className="text-red-500">Error loading bracket.</div>
+                        <div className="text-red-500 p-4">Error loading bracket.</div>
                       )
                     ) : (
-                      <div className="text-gray-500">No bracket submitted yet</div>
+                      <div className="text-gray-500 p-4">No bracket submitted yet</div>
                     )}
                   </td>
                 </tr>

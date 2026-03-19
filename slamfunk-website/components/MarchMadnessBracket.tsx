@@ -42,6 +42,7 @@ interface MarchMadnessBracketProps {
   submissionId?: string
   userID?: string
   roundData?: Bracket
+  readOnly?: boolean
 }
 
 const SUBMISSION_DEADLINE = new Date("2026-03-21T12:00:00")
@@ -52,6 +53,7 @@ const MarchMadnessBracket: React.FC<MarchMadnessBracketProps> = ({
   submissionId = "user_bracket",
   userID = crypto.randomUUID(),
   roundData,
+  readOnly = false,
 }) => {
   const [bracket, setBracket] = useState<BracketData>(
     roundData
@@ -127,7 +129,7 @@ const MarchMadnessBracket: React.FC<MarchMadnessBracketProps> = ({
   }, [bracket, onBracketChange])
 
   const handleWinnerSelection = (round: string, matchId: string, winner: Team) => {
-    if (isDeadlinePassed) return
+    if (isDeadlinePassed || readOnly) return
 
     const updatedBracket = { ...bracket }
 
@@ -252,8 +254,8 @@ const MarchMadnessBracket: React.FC<MarchMadnessBracketProps> = ({
           <div
             className={`flex items-center justify-between p-2 rounded-md cursor-pointer transition-colors ${
               winner === team1 ? "bg-blue-100 dark:bg-blue-900" : "hover:bg-gray-100 dark:hover:bg-gray-700"
-            } ${isDeadlinePassed ? "opacity-80 cursor-not-allowed" : ""}`}
-            onClick={() => team1 && !isDeadlinePassed && handleWinnerSelection(round, matchId, team1)}
+            } ${isDeadlinePassed || readOnly ? "opacity-80 cursor-not-allowed" : ""}`}
+            onClick={() => team1 && !isDeadlinePassed && !readOnly && handleWinnerSelection(round, matchId, team1)}
           >
             <div className="flex items-center gap-1 flex-1 min-w-0">
               {team1Logo && (
@@ -272,15 +274,15 @@ const MarchMadnessBracket: React.FC<MarchMadnessBracketProps> = ({
               name={`${round}-${matchId}`}
               checked={winner === team1}
               onChange={() => {}}
-              disabled={!team1 || !team2 || isDeadlinePassed}
+              disabled={!team1 || !team2 || isDeadlinePassed || readOnly}
               className="ml-1 flex-shrink-0"
             />
           </div>
           <div
             className={`flex items-center justify-between p-2 rounded-md cursor-pointer transition-colors mt-1 ${
               winner === team2 ? "bg-blue-100 dark:bg-blue-900" : "hover:bg-gray-100 dark:hover:bg-gray-700"
-            } ${isDeadlinePassed ? "opacity-80 cursor-not-allowed" : ""}`}
-            onClick={() => team2 && !isDeadlinePassed && handleWinnerSelection(round, matchId, team2)}
+            } ${isDeadlinePassed || readOnly ? "opacity-80 cursor-not-allowed" : ""}`}
+            onClick={() => team2 && !isDeadlinePassed && !readOnly && handleWinnerSelection(round, matchId, team2)}
           >
             <div className="flex items-center gap-1 flex-1 min-w-0">
               {team2Logo && (
@@ -299,7 +301,7 @@ const MarchMadnessBracket: React.FC<MarchMadnessBracketProps> = ({
               name={`${round}-${matchId}`}
               checked={winner === team2}
               onChange={() => {}}
-              disabled={!team1 || !team2 || isDeadlinePassed}
+              disabled={!team1 || !team2 || isDeadlinePassed || readOnly}
               className="ml-1 flex-shrink-0"
             />
           </div>
@@ -466,7 +468,7 @@ const MarchMadnessBracket: React.FC<MarchMadnessBracketProps> = ({
         </div>
       )}
 
-      {isDeadlinePassed && (
+      {!readOnly && isDeadlinePassed && (
         <Alert variant="destructive" className="mb-4">
           <AlertCircle className="h-4 w-4" />
           <AlertTitle style={{ fontFamily: 'Bayon, sans-serif' }}>Submission Closed</AlertTitle>
@@ -481,24 +483,26 @@ const MarchMadnessBracket: React.FC<MarchMadnessBracketProps> = ({
           March Madness 2025
         </h2>
 
-        <div className="flex space-x-2">
+        {!readOnly && (
+          <div className="flex space-x-2">
 
-          <button
-            onClick={exportBracket}
-            disabled={isDeadlinePassed || isSaving}
-            className="flex items-center px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-lg font-bold text-lg hover:from-orange-600 hover:to-orange-700 transition-all shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:from-orange-500 disabled:hover:to-orange-600"
-            style={{ fontFamily: 'Bayon, sans-serif' }}
-          >
-            {isSaving ? (
-              <>Saving...</>
-            ) : (
-              <>
-                <Send className="mr-2 h-5 w-5" />
-                Submit Bracket
-              </>
-            )}
-          </button>
-        </div>
+            <button
+              onClick={exportBracket}
+              disabled={isDeadlinePassed || isSaving}
+              className="flex items-center px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-lg font-bold text-lg hover:from-orange-600 hover:to-orange-700 transition-all shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:from-orange-500 disabled:hover:to-orange-600"
+              style={{ fontFamily: 'Bayon, sans-serif' }}
+            >
+              {isSaving ? (
+                <>Saving...</>
+              ) : (
+                <>
+                  <Send className="mr-2 h-5 w-5" />
+                  Submit Bracket
+                </>
+              )}
+            </button>
+          </div>
+        )}
       </div>
 
       <div
