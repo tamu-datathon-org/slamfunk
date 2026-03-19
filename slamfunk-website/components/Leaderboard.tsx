@@ -77,7 +77,7 @@ export default function Leaderboard() {
                   <td colSpan={3} className="p-4 bg-white border border-gray-200">
                     {user.bestBracket ? (
                       selectedBracket ? (
-                        <div className="w-full overflow-x-auto overflow-y-hidden border border-gray-300 rounded-lg" style={{ maxHeight: '700px' }}>
+                        <div className="w-full overflow-auto border border-gray-300 rounded-lg">
                           <MarchMadnessBracket
                             roundData={selectedBracket}
                             userID={user.uid}
