@@ -41,15 +41,17 @@ export default function NewBracket() {
                     />
                 </div>
                 <div className='relative z-10 w-full p-4 md:p-6 lg:p-8'>
-                    <h1 className='mt-8 text-4xl font-bold text-white' style={{ fontFamily: 'Bayon, sans-serif' }}>Create New Bracket</h1>
-                    <h4 className='text-white text-lg' style={{ fontFamily: 'Bayon, sans-serif' }}>
-                        Fill out your March Madness bracket and submit your predictions
+                    <h1 className='mt-8 text-4xl font-bold text-white' style={{ fontFamily: 'Bayon, sans-serif' }}>Bracket Submissions Closed</h1>
+                    <h4 className='text-white text-lg mb-8' style={{ fontFamily: 'Bayon, sans-serif' }}>
+                        The deadline for creating new brackets has passed. You can view your existing brackets on the bracket page.
                     </h4>
-                    <MarchMadnessBracket
-                        initialMatches={generateSampleMatches()}
-                        submissionId={crypto.randomUUID().toString()}
-                        userID={userId!}
-                    />
+                    <a
+                        href='/bracket'
+                        className='px-6 py-3 bg-white text-[#1e3a5f] rounded-lg font-bold hover:bg-gray-100 transition-colors inline-block'
+                        style={{ fontFamily: 'Bayon, sans-serif' }}
+                    >
+                        View My Brackets
+                    </a>
                 </div>
             </div>
         </div>

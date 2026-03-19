@@ -46,14 +46,15 @@ export default function EditBracket() {
                     />
                 </div>
                 <div className='relative z-10 w-full p-4 md:p-6 lg:p-8'>
-                    <h1 className='mt-8 text-4xl font-bold text-white' style={{ fontFamily: 'Bayon, sans-serif' }}>Bracket</h1>
+                    <h1 className='mt-8 text-4xl font-bold text-white' style={{ fontFamily: 'Bayon, sans-serif' }}>View Bracket</h1>
                     <h4 className='text-white text-lg' style={{ fontFamily: 'Bayon, sans-serif' }}>
-                        You can view your brackets but changes won't be implemented!
+                        Viewing your bracket submission (editing is now closed)
                     </h4>
                     <MarchMadnessBracket
                         submissionId={bracket.id}
                         userID={userId!}
                         roundData={bracket}
+                        readOnly={true}
                     />
                 </div>
             </div>

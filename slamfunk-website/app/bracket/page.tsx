@@ -5,13 +5,13 @@ import Header from 'components/Header';
 import { FaBasketballBall } from "react-icons/fa";
 import { getSession } from 'next-auth/react';
 import { Bracket } from 'app/api/bracket/route';
-import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import { redirect } from 'next/navigation';
 
 const App: React.FC = () => {
     const [brackets, setBrackets] = useState<Bracket[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
-    const router = useRouter();
+    const [userId, setUserId] = useState<string | null>(null);
 
     useEffect(() => {
 
@@ -19,7 +19,8 @@ const App: React.FC = () => {
             const session = await getSession();
             const userId = session?.user?.id;
             console.log("Fetching brackets for user:", userId);
-            if (!userId) { router.push('/login'); return; }
+            if (!userId) { setLoading(false); setUserId(null); return; }
+            setUserId(userId);
             const res = await fetch(`/api/bracket/${userId}`)
             console.log("Fetch response status:", res.status);
             if (res.ok) {
@@ -39,16 +40,7 @@ const App: React.FC = () => {
     }, [])
 
     if (loading) { return <></>; }
-
-    const handleDeleteBracket = async (bid: string) => {
-        const res = await fetch(`/api/bracket/delete/${bid}`, { method: 'DELETE' });
-        if (res.ok) {
-            setBrackets(brackets.filter(bracket => bracket.id !== bid));
-        } else {
-            console.error('Error deleting bracket');
-            router.push('/error?error=error deleting bracket');
-        }
-    }
+    if (!userId) { return redirect('/login'); }
 
     return (
         <div className='flex flex-col min-h-screen'>
@@ -65,7 +57,7 @@ const App: React.FC = () => {
                 <div className='relative z-10 w-full p-4 md:p-6 lg:p-8'>
                     <h1 className='mt-8 text-4xl font-bold text-white' style={{ fontFamily: 'Bayon, sans-serif' }}>View Submissions</h1>
                     <h4 className='text-white text-lg' style={{ fontFamily: 'Bayon, sans-serif' }}>
-                    Manage your bracket submissions (up to 5 brackets allowed)
+                    View your bracket submissions (bracket editing is now closed)
                     </h4>
                     <div className='my-4 h-full flex flex-col gap-y-2'>
                         {brackets.map((bracket: Bracket) => (
@@ -84,28 +76,10 @@ const App: React.FC = () => {
                                     >
                                         View
                                     </a>
-                                    <button
-                                        onClick={() => handleDeleteBracket(bracket.id)}
-                                        type="button"
-                                        className='px-4 py-2 bg-red-200 text-red-900 rounded-lg font-bold'
-                                        style={{ fontFamily: 'Bayon, sans-serif' }}
-                                    >
-                                        Delete
-                                    </button>
                                 </div>
                             </div>
                         ))}
                     </div>
-                    {(brackets.length < 5) ?
-                    <a
-                        href='/bracket/new'
-                        className='px-4 py-2 bg-black text-white rounded-lg font-bold'
-                        style={{ fontFamily: 'Bayon, sans-serif' }}
-                    >
-                        New Bracket
-                    </a>
-                    : <></> }
-
                 </div>
             </div>
         </div>
